@@ -1,4 +1,4 @@
-publishdir="publish"
+publishdir="docs"
 baseURL = 'https://ivkin.dev'
 languageCode = 'en-us'
 theme='anatole'
