@@ -1,7 +1,7 @@
 ---
 title: "I quit my job"
 date: 2022-03-15T19:54:28-04:00
-draft: true
+draft: false
 ---
 I quit my job a week ago. It's ironic because I'm Russian, and it's probably the worst possible time right now to be unemployed if you are Russian. Because of the war.  
 

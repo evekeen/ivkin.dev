@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title></title>
-    <link>https://ivkin.dev/</link>
-    <description>Recent content on </description>
+    <title>Posts on </title>
+    <link>https://ivkin.dev/posts/</link>
+    <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Mar 2022 19:54:28 -0400</lastBuildDate><atom:link href="https://ivkin.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Mar 2022 19:54:28 -0400</lastBuildDate><atom:link href="https://ivkin.dev/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>I quit my job</title>
       <link>https://ivkin.dev/posts/first-post/</link>
