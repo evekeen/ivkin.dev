@@ -4,6 +4,7 @@ languageCode = 'en-us'
 theme='anatole'
 author="Alexander Ivkin"
 disqusShortname="https-ivkin-dev"
+gtagId= "G-MYZ5L5XZR9"
 
 [params]
 title='Alexander Ivkin'
@@ -13,7 +14,7 @@ description="software developer and entrepreneur"
 displayMode = "dark"
 pygmentsCodeFences = true
 pygmentsUseClasses = true
-mainSections = ["posts"]
+mainSections = ["post"]
 gtagId= "G-MYZ5L5XZR9"
 
 [[params.socialIcons]]
