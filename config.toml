@@ -3,6 +3,7 @@ baseURL = 'https://ivkin.dev'
 languageCode = 'en-us'
 theme='anatole'
 author="Alexander Ivkin"
+disqusShortname="https-ivkin-dev"
 
 [params]
 title='Alexander Ivkin'
@@ -13,6 +14,7 @@ displayMode = "dark"
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 mainSections = ["posts"]
+gtagId= "G-MYZ5L5XZR9"
 
 [[params.socialIcons]]
 icon = "fab fa-linkedin"
