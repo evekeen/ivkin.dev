@@ -10,4 +10,6 @@ It's time to get a fresh glance at the AR technology - it must have developed si
 However, the frisbee time has passed, and now it's time for new experiments. I have a few ideas for AR products. However, it seems convenient [A-Frame](https://aframe.io) does not support user interactions with the 3D interface.
 The only option is to use a 2D <div> transparent overlay with regular HTML elements, which seems a little bit too 20th century to me.
 I guess I will have to either stick with the Apple ARKit for iOS or learn the Unity interactions.  
+At first, Apple technology is extremely simple and fun to use. I've managed to create a brand new scene with interactions in just about 30 minutes after watching a few videos. BTW [Apple videos from WWDC](https://developer.apple.com/videos/play/wwdc2019/609) are extremely well prepared, and I highly recommend watching them! Now I almost get why so many people purchase tickets to be there in person - not only it's inspiring, it's also very useful.
+![](/images/reality-composer.gif "Frisbee VR")
 [This video](https://www.youtube.com/watch?v=OE66gtiF8QQ) seems very clear and on target. It's pretty rare to find someone, who is not giving 80% of useless content. Here it was surprisingly exactly what I was looking for.
