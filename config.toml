@@ -27,3 +27,7 @@ icon = "fab fa-github"
 title = "Github"
 url = "https://github.com/evekeen"
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
