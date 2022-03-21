@@ -4,7 +4,10 @@ date: 2022-03-20T11:31:55-04:00
 draft: false
 ---
 
-[MIT reality hack](https://www.mitrealityhack.com/) is about to start in a couple of days, and I'm excited to join many talented people to build something amazing this week!  
-It's time to get a fresh glance on the AR technology, it must have developed significantly since my last project. I've created a prototype of a [VR frisbee game](https://github.com/evekeen/vrfrisbee), that allows your to throw virtual frisbees, that fly as they would fly in a real world. Originally I wanted to re-create the Ultimate Frisbee experience in the VR world, since all the league were closed because of the pandemic.  
+[MIT reality hack](https://www.mitrealityhack.com/) is about to start in a couple of days, and I'm excited to join many talented people to build something beautiful this week!  
+It's time to get a fresh glance at the AR technology - it must have developed significantly since my last project. I've created a prototype of a [VR frisbee game](https://github.com/evekeen/vrfrisbee) that allows you to throw virtual frisbees that fly as they would fly in the real world. Originally I wanted to re-create the Ultimate Frisbee experience in the VR world since all the leagues were closed because of the pandemic.  
 ![](/images/frisbee.gif "Frisbee VR")
-However, the frisbee time has passed, and now it's time for new experiments.
+However, the frisbee time has passed, and now it's time for new experiments. I have a few ideas for AR products. However, it seems convenient [A-Frame](https://aframe.io) does not support user interactions with the 3D interface.
+The only option is to use a 2D <div> transparent overlay with regular HTML elements, which seems a little bit too 20th century to me.
+I guess I will have to either stick with the Apple ARKit for iOS or learn the Unity interactions.  
+[This video](https://www.youtube.com/watch?v=OE66gtiF8QQ) seems very clear and on target. It's pretty rare to find someone, who is not giving 80% of useless content. Here it was surprisingly exactly what I was looking for.
