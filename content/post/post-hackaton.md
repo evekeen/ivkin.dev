@@ -16,7 +16,7 @@ The idea is to make it fun to practice pitch recognition, which is essential for
 Here are a few tips for people interested in hackathons:
 ## Experience does not matter
 You will learn right there. Don't ever think twice about participating because of a lack of expertise. There are a lot of students, and as long as you can learn, you'll be fine. On my team, the 22 years old musician from Berkley was doing a better job of coding in Unity than I - a software engineer with 15 years of experience.
-Take it easy
+## Take it easy
 Hackathons are stressful enough, so you don't need to put extra pressure on yourself. I made a mistake worrying too much about it, so I could not sleep very well and I was very anxious. Being in this state significantly reduces your productivity. You should rather take a deep breath and focus on having fun. In the end, I could see that people with this mindset not only won the hackathon but also enjoyed doing it more.
 
 ## Meet people and make friends
