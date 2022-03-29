@@ -11,7 +11,6 @@ title='Alexander Ivkin'
 author="Alexander Ivkin"
 profilePicture = "images/ava-london-face.jpg"
 description="software developer and entrepreneur"
-displayMode = "dark"
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 mainSections = ["post"]
