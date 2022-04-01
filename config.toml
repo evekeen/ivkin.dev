@@ -16,6 +16,7 @@ pygmentsUseClasses = true
 mainSections = ["post"]
 gtagId= "G-MYZ5L5XZR9"
 readMore = true
+images = ["images/ava-london-face.jpg"]
 
 [[params.socialIcons]]
 icon = "fab fa-twitter"
@@ -36,3 +37,6 @@ url = "https://www.linkedin.com/in/evekeen"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[social]
+twitter = "alexivkin"
