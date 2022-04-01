@@ -16,7 +16,7 @@ pygmentsUseClasses = true
 mainSections = ["post"]
 gtagId= "G-MYZ5L5XZR9"
 readMore = true
-images = ["images/ava-london-face.jpg"]
+images = ["images/ava-london-face-small.jpg"]
 
 [[params.socialIcons]]
 icon = "fab fa-twitter"
