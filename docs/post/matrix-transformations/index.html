@@ -20,6 +20,7 @@
 
   
   <meta charset="utf-8" /><meta name="generator" content="Hugo 0.94.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Alexander Ivkin" />
   <meta
     name="description"
     content="
@@ -34,8 +35,8 @@
     
     <link
       rel="stylesheet"
-      href="/scss/main.min.dd48129ac8fa8b31b5a5a0d72c50c389e3b176809b8dbd7ccdc0ef3c325d78f9.css"
-      integrity="sha256-3UgSmsj6izG1paDXLFDDieOxdoCbjb18zcDvPDJdePk="
+      href="/scss/main.min.5551757e3608c8c17519a404d0c78646f8b4ce68b04e5acc290a21597ce09467.css"
+      integrity="sha256-VVF1fjYIyMF1GaQE0MeGRvi0zmiwTlrMKQohWXzglGc="
       crossorigin="anonymous"
       type="text/css"
     />
@@ -201,7 +202,7 @@ The process of estimation of the camera pose is called SLAM (Simultaneous Locali
 
     ,
         "url" : "https:\/\/ivkin.dev\/post\/matrix-transformations\/",
-        "wordCount" : "607",
+        "wordCount" : "701",
         "genre" : [ ],
         "keywords" : [ ]
     }
@@ -217,7 +218,12 @@ The process of estimation of the camera pose is called SLAM (Simultaneous Locali
     
   >
     <div class="wrapper">
-      <aside class="wrapper__sidebar"><div
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
   class="sidebar
     animated fadeInDown
 
@@ -293,7 +299,12 @@ The process of estimation of the camera pose is called SLAM (Simultaneous Locali
 </script>
 </div>
 </aside>
-      <main class="wrapper__main">
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
         <header class="header"><div
   class="
     animated fadeInDown
@@ -349,7 +360,7 @@ The process of estimation of the camera pose is called SLAM (Simultaneous Locali
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">3-minute read</span>
+            <span class="post__meta-text">4-minute read</span>
           </li>
         </ul>
 
@@ -369,7 +380,7 @@ Look at <a href="https://tinylittlemaggie.github.io/transformation-matrix-playgr
 Any standard library normally includes tools to execute matrix operations, and some APIs are only talking matrices -
 when it comes to GPU computing, it&rsquo;s much more efficient, and everything in the 3D world is built around matrices.
 So go learn matrix algebra if you haven&rsquo;t already!</p>
-<h2 id="the-slam-algorithm">The SLAM algorithm</h2>
+<h2 id="the-visual-slam-algorithm">The Visual SLAM algorithm</h2>
 <p>Given two consequent frames, we can compute the relative camera motion between them. The best library for that is OpenCV, so I&rsquo;ve included links to their documentation here:</p>
 <ol>
 <li>Extract <a href="https://docs.opencv.org/4.x/df/d54/tutorial_py_features_meaning.html">features</a> from both frames</li>
@@ -380,8 +391,10 @@ So go learn matrix algebra if you haven&rsquo;t already!</p>
 This way the object stays in place in the physical world.</p>
 <h2 id="performance-issues">Performance issues</h2>
 <p>The described algorithm uses CPU extensively and will perform poorly on mobile devices, especially when processing high-definition images.
-The simplest thing to boost the performance is to downscale the image to a lower resolution, find the transformation, and then apply that matrix to the original frames.
-Downscaling is pretty straightforward however, to properly apply your matrices you will have to prepare them to work for bigger images.</p>
+The simplest way to boost the performance is to downscale the image to a lower resolution, find the transformation, and then apply that matrix to the original frames.<br>
+Downscaling is pretty straightforward - just use something like <code>resize</code> function from OpenCV, which works pretty fast, allowing us to focus on the real issue here - finding the transformation matrix.
+And this part is very sensitive to the image resolution.<br>
+However, even after you found your downscaled transformation between frames, to properly apply these matrices you will have to prepare them to work for bigger images.</p>
 <h3 id="apply-downscaled-transformations">Apply downscaled transformations</h3>
 <p>Let&rsquo;s say the original image is 1920x1080, and you want to downscale it to 640x480.</p>
 <pre tabindex="0"><code>scale = 640 / 1920
@@ -399,11 +412,12 @@ In Swift language it looks like this:</p>
     .concatenating(downscaled)
     .concatenating(CGAffineTransform(scaleX: 1/scale, y: 1/scale))
 </code></pre><p>The order of these operations is extremely important. I&rsquo;ve spent some time before figuring out what is the matrix operation order under the hood.
-For example, one could use <code>scaledBy</code> or <code>translateBy</code> functions instead of <code>concatenating</code> to achieve the same result, however they apply matrix multiplications in the reverse order.
+For example, one could use <code>scaledBy</code> or <code>translateBy</code> functions instead of <code>concatenating</code> to achieve the same result, however, they apply matrix multiplications in the reverse order.
 Always check <a href="https://developer.apple.com/documentation/coregraphics/cgaffinetransform/1455996-concatenating">the docs</a> to make sure.</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>This way you can significantly boost the performance of your SLAM algorithm while keeping adequate quality.
-In my case, I reduced the processing time from 1 minute to 20 seconds for 4K videos and to 7-9 seconds for 1080p, which is a huge improvement.</p>
+In my case, I&rsquo;ve reduced the processing time from 1 minute to 20 seconds for 4K videos and to 7 seconds for 1080p, which is a huge improvement.<br>
+If you have Oculus Quest you probably noticed, how it tracks the pose of the headset in real time with insane accuracy. Even though they utilize the advantage of having accelerometer sensor data, they definitely excel at tracking algorithms and performance optimizations such as this simple approach.</p>
 </div>
     <div class="post__footer">
       

@@ -54,7 +54,7 @@ upscaled = scaleMatrix(scale) x downscaled x scaleMatrix(1/scale)
 ```
 where `x` is the matrix multiplication operator.
 1. We convert the coordinate system to the downscaled one first by using a scale transform `scaleMatrix(scale)`.
-2. Then we apply our `downscaled` transform. 
+2. Then we apply our `downscaled` transform.
 3. We convert back to the original coordinate system by using this scale transform `scaleMatrix(1/scale)`.
 
 This way we make sure we apply our transform in the correct coordinate system.  
@@ -65,12 +65,11 @@ let upscaled = CGAffineTransform(scaleX: scale, y: scale)
     .concatenating(CGAffineTransform(scaleX: 1/scale, y: 1/scale))
 ```
 The order of these operations is extremely important. I've spent some time before figuring out what is the matrix operation order under the hood.
-For example, one could use `scaledBy` or `translateBy` functions instead of `concatenating` to achieve the same result, however they apply matrix multiplications in the reverse order.
+For example, one could use `scaledBy` or `translateBy` functions instead of `concatenating` to achieve the same result, however, they apply matrix multiplications in the reverse order.
 Always check [the docs](https://developer.apple.com/documentation/coregraphics/cgaffinetransform/1455996-concatenating) to make sure.
 
 ### Conclusion
 This way you can significantly boost the performance of your SLAM algorithm while keeping adequate quality.
-In my case, I've reduced the processing time from 1 minute to 20 seconds for 4K videos and to 7 seconds for 1080p, which is a huge improvement.
-If you have Oculus Quest you probably noticed, how it tracks the pose of the headset in realtime with insane accuracy.
-Even though they utilize the advantage of having accelerometer sensor data, they definitely excel at tracking algorithms and performance optimizations such as this simple approach.
+In my case, I've reduced the processing time from 1 minute to 20 seconds for 4K videos and to 7 seconds for 1080p, which is a huge improvement.  
+If you have Oculus Quest you probably noticed, how it tracks the pose of the headset in real time with insane accuracy. Even though they utilize the advantage of having accelerometer sensor data, they definitely excel at tracking algorithms and performance optimizations such as this simple approach.
 
