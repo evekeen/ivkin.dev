@@ -6,7 +6,19 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Mar 2022 11:54:53 -0400</lastBuildDate><atom:link href="https://ivkin.dev/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Apr 2022 11:16:55 -0400</lastBuildDate><atom:link href="https://ivkin.dev/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Matrices and camera pose estimation</title>
+      <link>https://ivkin.dev/post/matrix-transformations/</link>
+      <pubDate>Thu, 07 Apr 2022 11:16:55 -0400</pubDate>
+      
+      <guid>https://ivkin.dev/post/matrix-transformations/</guid>
+      
+        <description>Camera pose estimation One of the essential features of Ace Trace app (a video editor) is to figure the camera motion as well as zoom changes. This enables the app to pin an object trajectory to a certain point in the physical world coordinate system vs working in the camera viewport.
+The process of estimation of the camera pose is called SLAM (Simultaneous Localization And Mapping), and here we&amp;rsquo;re are going to talk specifically about Visual SLAM, meaning that we&amp;rsquo;re only using the visual information to estimate the camera pose.</description>
+      
+    </item>
+    
     <item>
       <title>Reality Hack is over</title>
       <link>https://ivkin.dev/post/post-hackaton/</link>
