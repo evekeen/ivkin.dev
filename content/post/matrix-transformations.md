@@ -28,7 +28,7 @@ Any standard library normally includes tools to execute matrix operations, and s
 when it comes to GPU computing, it's much more efficient, and everything in the 3D world is built around matrices.
 So go learn matrix algebra if you haven't already!
 
-## The SLAM algorithm
+## The Visual SLAM algorithm
 Given two consequent frames, we can compute the relative camera motion between them. The best library for that is OpenCV, so I've included links to their documentation here:
 1. Extract [features](https://docs.opencv.org/4.x/df/d54/tutorial_py_features_meaning.html) from both frames
 2. [Find correspondence](https://docs.opencv.org/4.x/dc/dc3/tutorial_py_matcher.html) between features
@@ -39,8 +39,10 @@ This way the object stays in place in the physical world.
 
 ## Performance issues
 The described algorithm uses CPU extensively and will perform poorly on mobile devices, especially when processing high-definition images.
-The simplest thing to boost the performance is to downscale the image to a lower resolution, find the transformation, and then apply that matrix to the original frames.
-Downscaling is pretty straightforward however, to properly apply your matrices you will have to prepare them to work for bigger images.
+The simplest way to boost the performance is to downscale the image to a lower resolution, find the transformation, and then apply that matrix to the original frames.  
+Downscaling is pretty straightforward - just use something like `resize` function from OpenCV, which works pretty fast, allowing us to focus on the real issue here - finding the transformation matrix.
+And this part is very sensitive to the image resolution.  
+However, even after you found your downscaled transformation between frames, to properly apply these matrices you will have to prepare them to work for bigger images.
 ### Apply downscaled transformations
 Let's say the original image is 1920x1080, and you want to downscale it to 640x480.
 ```
@@ -68,4 +70,7 @@ Always check [the docs](https://developer.apple.com/documentation/coregraphics/c
 
 ### Conclusion
 This way you can significantly boost the performance of your SLAM algorithm while keeping adequate quality.
-In my case, I reduced the processing time from 1 minute to 20 seconds for 4K videos and to 7-9 seconds for 1080p, which is a huge improvement.
+In my case, I've reduced the processing time from 1 minute to 20 seconds for 4K videos and to 7 seconds for 1080p, which is a huge improvement.
+If you have Oculus Quest you probably noticed, how it tracks the pose of the headset in realtime with insane accuracy.
+Even though they utilize the advantage of having accelerometer sensor data, they definitely excel at tracking algorithms and performance optimizations such as this simple approach.
+
