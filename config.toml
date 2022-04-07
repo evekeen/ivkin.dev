@@ -17,6 +17,9 @@ mainSections = ["post"]
 gtagId= "G-MYZ5L5XZR9"
 readMore = true
 images = ["images/ava-london-face-small.jpg"]
+subscribeUrl = "https://tinyletter.com/ivkin"
+subscribeText = "Subscribe"
+subscribeTextPost = "Subscribe to this blog"
 
 [[params.socialIcons]]
 icon = "fab fa-twitter"
