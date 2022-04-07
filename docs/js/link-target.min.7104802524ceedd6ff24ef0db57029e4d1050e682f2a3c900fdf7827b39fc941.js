@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{const e=Array.prototype.slice.call(document.querySelectorAll(".post__content a"),0);if(e.length<1)return;e.forEach(e=>{e.target="_blank"})})
