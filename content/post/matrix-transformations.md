@@ -28,17 +28,9 @@ Any standard library normally includes tools to execute matrix operations, and s
 when it comes to GPU computing, it's much more efficient, and everything in the 3D world is built around matrices.
 So go learn matrix algebra if you haven't already!
 
-## The Visual SLAM algorithm
-Given two consequent frames, we can compute the relative camera motion between them. The best library for that is OpenCV, so I've included links to their documentation here:
-1. Extract [features](https://docs.opencv.org/4.x/df/d54/tutorial_py_features_meaning.html) from both frames
-2. [Find correspondence](https://docs.opencv.org/4.x/dc/dc3/tutorial_py_matcher.html) between features
-3. [Estimate the affine transformation matrix](https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga27865b1d26bac9ce91efaee83e94d4dd) between the two frames
-
-Having the transformation matrix, we can apply it to any object located in the previous frame to reposition it in the current frame.
-This way the object stays in place in the physical world.
-
-## Performance issues
-The described algorithm uses CPU extensively and will perform poorly on mobile devices, especially when processing high-definition images.
+## The Visual SLAM algorithm performance issues
+Running matrix operations using OpenCV will normally involve a lot of computation on CPU. 
+It will perform poorly on mobile devices, especially when processing high-definition images.
 The simplest way to boost the performance is to downscale the image to a lower resolution, find the transformation, and then apply that matrix to the original frames.  
 Downscaling is pretty straightforward - just use something like `resize` function from OpenCV, which works pretty fast, allowing us to focus on the real issue here - finding the transformation matrix.
 And this part is very sensitive to the image resolution.  

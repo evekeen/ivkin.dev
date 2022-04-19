@@ -203,7 +203,7 @@ The process of estimation of the camera pose is called SLAM (Simultaneous Locali
 
     ,
         "url" : "https:\/\/ivkin.dev\/post\/matrix-transformations\/",
-        "wordCount" : "701",
+        "wordCount" : "629",
         "genre" : [ ],
         "keywords" : [ ]
     }
@@ -366,7 +366,7 @@ The process of estimation of the camera pose is called SLAM (Simultaneous Locali
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">4-minute read</span>
+            <span class="post__meta-text">3-minute read</span>
           </li>
           <li class="post__meta-item">
             <em class="fas fa-envelope post__meta-icon"></em>
@@ -392,17 +392,9 @@ Look at <a href="https://tinylittlemaggie.github.io/transformation-matrix-playgr
 Any standard library normally includes tools to execute matrix operations, and some APIs are only talking matrices -
 when it comes to GPU computing, it&rsquo;s much more efficient, and everything in the 3D world is built around matrices.
 So go learn matrix algebra if you haven&rsquo;t already!</p>
-<h2 id="the-visual-slam-algorithm">The Visual SLAM algorithm</h2>
-<p>Given two consequent frames, we can compute the relative camera motion between them. The best library for that is OpenCV, so I&rsquo;ve included links to their documentation here:</p>
-<ol>
-<li>Extract <a href="https://docs.opencv.org/4.x/df/d54/tutorial_py_features_meaning.html">features</a> from both frames</li>
-<li><a href="https://docs.opencv.org/4.x/dc/dc3/tutorial_py_matcher.html">Find correspondence</a> between features</li>
-<li><a href="https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga27865b1d26bac9ce91efaee83e94d4dd">Estimate the affine transformation matrix</a> between the two frames</li>
-</ol>
-<p>Having the transformation matrix, we can apply it to any object located in the previous frame to reposition it in the current frame.
-This way the object stays in place in the physical world.</p>
-<h2 id="performance-issues">Performance issues</h2>
-<p>The described algorithm uses CPU extensively and will perform poorly on mobile devices, especially when processing high-definition images.
+<h2 id="the-visual-slam-algorithm-performance-issues">The Visual SLAM algorithm performance issues</h2>
+<p>Running matrix operations using OpenCV will normally involve a lot of computation on CPU.
+It will perform poorly on mobile devices, especially when processing high-definition images.
 The simplest way to boost the performance is to downscale the image to a lower resolution, find the transformation, and then apply that matrix to the original frames.<br>
 Downscaling is pretty straightforward - just use something like <code>resize</code> function from OpenCV, which works pretty fast, allowing us to focus on the real issue here - finding the transformation matrix.
 And this part is very sensitive to the image resolution.<br>
