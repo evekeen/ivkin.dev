@@ -2,6 +2,7 @@
 title: "Getting ready for MIT Reality Hack"
 date: 2022-03-20T11:31:55-04:00
 draft: false
+Tags: ["vr", "ar", "hackathon"]
 ---
 
 [MIT reality hack](https://www.mitrealityhack.com/) is about to start in a couple of days, and I'm excited to join many talented people to build something beautiful this week!  

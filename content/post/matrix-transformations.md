@@ -2,7 +2,7 @@
 title: "Matrices and camera pose estimation"
 date: 2022-04-07T11:16:55-04:00
 Description: ""
-Tags: []
+Tags: ["tracking", "ar", "ace trace"]
 Categories: []
 DisableComments: false
 ---

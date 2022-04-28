@@ -2,7 +2,7 @@
 title: "Reality Hack is over"
 date: 2022-03-27T11:54:53-04:00
 Description: ""
-Tags: []
+Tags: ["vr", "ar", "hackathon"]
 Categories: []
 DisableComments: false
 ---
