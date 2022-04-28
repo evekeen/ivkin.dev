@@ -1,5 +1,5 @@
 ---
-title: "Sf Startup Conference"
+title: "San Francisco Startup Conference"
 date: 2022-04-28T12:34:22-04:00
 Description: ""
 Tags: []
@@ -7,8 +7,8 @@ Categories: []
 DisableComments: false
 ---
 
-What makes Silicon Valley a unique place?
-It’s supposed to not have seasons and very high prices - that’s what I was told all the time. And what about big Californian taxes?
+What makes Silicon Valley a unique place?  
+It’s supposed to not have seasons and very high prices - that’s what I was told all the time. And what about big Californian taxes?  
 However, for some reason, I always see this place in a completely different light.
 
 # Day 0
