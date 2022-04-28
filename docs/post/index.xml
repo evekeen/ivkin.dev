@@ -6,7 +6,19 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 Apr 2022 11:16:55 -0400</lastBuildDate><atom:link href="https://ivkin.dev/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Apr 2022 12:34:22 -0400</lastBuildDate><atom:link href="https://ivkin.dev/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sf Startup Conference</title>
+      <link>https://ivkin.dev/post/sf-startup-conference/</link>
+      <pubDate>Thu, 28 Apr 2022 12:34:22 -0400</pubDate>
+      
+      <guid>https://ivkin.dev/post/sf-startup-conference/</guid>
+      
+        <description>What makes Silicon Valley a unique place? It’s supposed to not have seasons and very high prices - that’s what I was told all the time. And what about big Californian taxes? However, for some reason, I always see this place in a completely different light.
+Day 0 I flew from sunny Boston to rainy San Francisco. And it’s not a joke, apparently, I managed to choose the worst possible week to fly there, which is technically not my fault - I was only trying to attend a conference.</description>
+      
+    </item>
+    
     <item>
       <title>Matrices and camera pose estimation</title>
       <link>https://ivkin.dev/post/matrix-transformations/</link>
