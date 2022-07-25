@@ -2,7 +2,7 @@
 title: "Summer status update"
 date: 2022-07-24T14:47:47-04:00
 Description: ""
-Tags: []
+Tags: ["startup"]
 Categories: []
 DisableComments: false
 ---
