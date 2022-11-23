@@ -6,7 +6,20 @@
     <description>Recent content in startup on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Apr 2022 12:34:22 -0400</lastBuildDate><atom:link href="https://ivkin.dev/tags/startup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Jul 2022 14:47:47 -0400</lastBuildDate><atom:link href="https://ivkin.dev/tags/startup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Summer status update</title>
+      <link>https://ivkin.dev/post/ace-trace-update/</link>
+      <pubDate>Sun, 24 Jul 2022 14:47:47 -0400</pubDate>
+      
+      <guid>https://ivkin.dev/post/ace-trace-update/</guid>
+      
+        <description>For the past few months I&amp;rsquo;ve been working non-stop on two things:
+Finding product-market-fit for Ace Trace Searching for like-minded people to build a new company together. For the Ace Trace my main focus was:
+UX improvements to increase the value of the product and hopefully retention Experimenting with the pricing and purchase options to allow more users to enjoy the app on one hand, and to target professional users separately to offer premium features for a higher price Delivering the automatic tracking feature for disc golf users to increase the value of the app, and enable B2B sales in the future.</description>
+      
+    </item>
+    
     <item>
       <title>San Francisco Startup Conference</title>
       <link>https://ivkin.dev/post/sf-startup-conference/</link>

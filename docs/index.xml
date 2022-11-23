@@ -6,7 +6,19 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Jul 2022 14:47:47 -0400</lastBuildDate><atom:link href="https://ivkin.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Nov 2022 21:20:47 -0500</lastBuildDate><atom:link href="https://ivkin.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to build and use a DyLib in iOS app</title>
+      <link>https://ivkin.dev/post/c-library-in-ios/</link>
+      <pubDate>Tue, 22 Nov 2022 21:20:47 -0500</pubDate>
+      
+      <guid>https://ivkin.dev/post/c-library-in-ios/</guid>
+      
+        <description>In Ace Trace App, I apply different curve fitting algorithms to create a smooth line and draw it in a video.
+In order to draw a realistic ball golf trajectory, it needs to follow the physics of the ball flight. There are many articles about specific forces affecting the ball. In the end, calculating coordinates at a time point comes down to solving differential equations with these forces and predicting the trajectory by experimental data.</description>
+      
+    </item>
+    
     <item>
       <title>Summer status update</title>
       <link>https://ivkin.dev/post/ace-trace-update/</link>

@@ -3,21 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ivkin.dev/</loc>
-    <lastmod>2022-07-24T14:47:47-04:00</lastmod>
+    <lastmod>2022-11-22T21:20:47-05:00</lastmod>
+  </url><url>
+    <loc>https://ivkin.dev/post/c-library-in-ios/</loc>
+    <lastmod>2022-11-22T21:20:47-05:00</lastmod>
   </url><url>
     <loc>https://ivkin.dev/post/</loc>
+    <lastmod>2022-11-22T21:20:47-05:00</lastmod>
+  </url><url>
+    <loc>https://ivkin.dev/tags/startup/</loc>
     <lastmod>2022-07-24T14:47:47-04:00</lastmod>
   </url><url>
     <loc>https://ivkin.dev/post/ace-trace-update/</loc>
     <lastmod>2022-07-24T14:47:47-04:00</lastmod>
   </url><url>
-    <loc>https://ivkin.dev/post/sf-startup-conference/</loc>
-    <lastmod>2022-04-28T12:34:22-04:00</lastmod>
-  </url><url>
-    <loc>https://ivkin.dev/tags/startup/</loc>
-    <lastmod>2022-04-28T12:34:22-04:00</lastmod>
-  </url><url>
     <loc>https://ivkin.dev/tags/</loc>
+    <lastmod>2022-07-24T14:47:47-04:00</lastmod>
+  </url><url>
+    <loc>https://ivkin.dev/post/sf-startup-conference/</loc>
     <lastmod>2022-04-28T12:34:22-04:00</lastmod>
   </url><url>
     <loc>https://ivkin.dev/tags/ace-trace/</loc>
