@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  class="html"
+><head>
+  <title>
+    
+      Alexander Ivkin
+        |
+        How to build and use a DyLib in iOS app
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.101.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Alexander Ivkin" />
+  <meta
+    name="description"
+    content="
+      software developer and entrepreneur
+
+
+    "
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.5014210c3468422f73fb3d21a3177659ce33c1f1d86987f6384f3a944e5a164d.css"
+      integrity="sha256-UBQhDDRoQi9z&#43;z0hoxd2Wc4zwfHYaYf2OE86lE5aFk0="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.69685904d5c2a0c6258d03c207b778c10466edf6cea928cc0164c376b0ad0930.css"
+    integrity="sha256-aWhZBNXCoMYljQPCB7d4wQRm7fbOqSjMAWTDdrCtCTA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.6d585e78d28cce1200d39fb133c92ed83df01738da721d0f48fb6eac62d24e04.css"
+    integrity="sha256-bVheeNKMzhIA05&#43;xM8ku2D3wFzjach0PSPturGLSTgQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.6b00d96498d59caa0dbcf9b49d30d821915291f2ceb0e19248523c8607ff43fa.css"
+    integrity="sha256-awDZZJjVnKoNvPm0nTDYIZFSkfLOsOGSSFI8hgf/Q/o="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://ivkin.dev/post/build-dylib-library-for-ios/" />
+
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/link-target.min.7104802524ceedd6ff24ef0db57029e4d1050e682f2a3c900fdf7827b39fc941.js"
+    integrity="sha256-cQSAJSTO7db/JO8NtXAp5NEFDmgvKjyQD994J7OfyUE="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.738c0e3a493854876aeab9e2316fd43f1936aeeac4cc6b3e60bb26456dba72ad.js"
+      integrity="sha256-c4wOOkk4VIdq6rniMW/UPxk2rurEzGs&#43;YLsmRW26cq0="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ivkin.dev/images/ava-london-face-small.jpg"/>
+
+<meta name="twitter:title" content="How to build and use a DyLib in iOS app"/>
+<meta name="twitter:description" content="In Ace Trace App, I apply different curve fitting algorithms to create a smooth line and draw it in a video.
+In order to draw a realistic ball golf trajectory, it needs to follow the physics of the ball flight. There are many articles about specific forces affecting the ball. In the end, calculating coordinates at a time point comes down to solving differential equations with these forces and predicting the trajectory by experimental data."/>
+<meta name="twitter:site" content="@alexivkin"/>
+
+
+
+  
+  <meta property="og:title" content="How to build and use a DyLib in iOS app" />
+<meta property="og:description" content="In Ace Trace App, I apply different curve fitting algorithms to create a smooth line and draw it in a video.
+In order to draw a realistic ball golf trajectory, it needs to follow the physics of the ball flight. There are many articles about specific forces affecting the ball. In the end, calculating coordinates at a time point comes down to solving differential equations with these forces and predicting the trajectory by experimental data." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ivkin.dev/post/build-dylib-library-for-ios/" /><meta property="og:image" content="https://ivkin.dev/images/ava-london-face-small.jpg"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-22T21:20:47-05:00" />
+<meta property="article:modified_time" content="2022-11-22T21:20:47-05:00" /><meta property="og:site_name" content="Alexander Ivkin" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "How to build and use a DyLib in iOS app",
+        "headline": "How to build and use a DyLib in iOS app",
+        "alternativeHeadline": "",
+        "description": "
+      
+        In Ace Trace App, I apply different curve fitting algorithms to create a smooth line and draw it in a video.\nIn order to draw a realistic ball golf trajectory, it needs to follow the physics of the ball flight. There are many articles about specific forces affecting the ball. In the end, calculating coordinates at a time point comes down to solving differential equations with these forces and predicting the trajectory by experimental data.
+
+
+      
+
+
+    ",
+        "inLanguage": "en-us",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ivkin.dev\/post\/build-dylib-library-for-ios\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Alexander Ivkin"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Alexander Ivkin"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Alexander Ivkin"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Alexander Ivkin"
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-11-22T21:20:47.00Z",
+        "datePublished": "2022-11-22T21:20:47.00Z",
+        "dateModified": "2022-11-22T21:20:47.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Alexander Ivkin",
+            "url": "https://ivkin.dev",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/ivkin.devfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://ivkin.dev/images/ava-london-face-small.jpg"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/ivkin.dev\/post\/build-dylib-library-for-ios\/",
+        "wordCount" : "955",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "ios"
+
+    
+      
+        ,
+
+      
+      "acetrace"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--light"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/ava-pro-300.jpg"
+        alt="profile picture"
+      />
+      <h1 class="sidebar__introduction-title">
+        <a href="/">Alexander Ivkin</a>
+      </h1>
+      <div class="sidebar__introduction-description">
+        <p>software developer and entrepreneur</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a href="https://twitter.com/alexivkin" rel="me" aria-label="Twitter" title="Twitter">
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://github.com/evekeen" rel="me" aria-label="Github" title="Github">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.linkedin.com/in/evekeen" rel="me" aria-label="LinkedIn" title="LinkedIn">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+    <div class="sidebar__subscribe">
+      <a href="https://tinyletter.com/ivkin" target="_blank">
+        Subscribe
+      </a>
+    </div>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        Alexander Ivkin
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.602bd2014468bd348112e2aa24f595c530d257a4ed6c335d7baaa6ac9a7ca6fb.js"
+    integrity="sha256-YCvSAURovTSBEuKqJPWVxTDSV6TtbDNde6qmrJp8pvs="
+    crossorigin="anonymous"
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MYZ5L5XZR9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-MYZ5L5XZR9');
+</script>
+</div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>How to Build and Use a DyLib in IOS App</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                Tue, Nov 22, 2022
+
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">5-minute read</span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-envelope post__meta-icon"></em>
+            <a href="https://tinyletter.com/ivkin" target="_blank">
+              Subscribe
+            </a>
+          </li>
+        </ul>
+
+      <p>In <a href="https://acetrace.app">Ace Trace App</a>, I apply different curve fitting algorithms to create a smooth line and draw it in a video.<br>
+In order to draw a realistic ball golf trajectory, it needs to follow the physics of the ball flight.
+<img src="/images/golf_ball_forces.jpg" alt=""></p>
+<p>There are many articles about specific forces affecting the ball. In the end, calculating coordinates at a time point comes down to solving differential equations with these forces and predicting the trajectory by experimental data.
+<img src="/images/golf_ball_trajectories.png" alt="">
+It&rsquo;s common to experiment with data and algorithms using Python and tools like SciPy; however, to run these algorithms on a mobile device, they must be written in a native language.<br>
+My primary platform is iOS, and there is no good tool available for curve fitting either in the standard library or in some package on Github. I came across a few  C++ libraries that can be very useful for curve fitting.</p>
+<h2 id="solving-differential-equations-with-boost">Solving differential equations with Boost</h2>
+<p>There is <a href="https://www.boost.org/">Boost&rsquo;s</a> module <strong>odeint</strong> for differential equations, which is the exact equivalent of what you might have used in Python.<br>
+And the good news is Boost can be installed on macOS and then included in a build without any additional hassle:</p>
+<pre tabindex="0"><code>brew install boost
+</code></pre><p>Add the corresponding path to <strong>Headers Search Paths</strong> to XCode project targets: <code>/opt/homebrew/Cellar/boost/1.80.0/include</code><br>
+Add the path to the <strong>Library Search Paths</strong> as well: <code>/opt/homebrew/Cellar/boost/1.80.0/lib</code><br>
+And then, you can use it in Objective-C code. Here is how I solve differential equations for the trajectory:</p>
+<pre tabindex="0"><code>#include &lt;boost/numeric/odeint.hpp&gt;
+using namespace boost::numeric::odeint;
+
+void derivatives(const state_type &amp;x, state_type &amp; dxdt, double t) {
+    auto w_i = x[7];
+    auto w_k = x[9];
+    dxdt[0] = x[1];
+    dxdt[1] = -(d / m) * x[1] * x[1] + coef * (w_j * x[5] - w_k * x[3]);    
+    dxdt[2] = x[3];
+    dxdt[3] = -32.2 - (d / m) * x[3] * x[3] + coef * (w_k * x[1] - w_i * x[5]);    
+    dxdt[4] = x[5];
+    dxdt[5] = -(d / m) * x[5] * x[5] + coef * (w_i * x[3] - w_j * x[1]);
+    dxdt[6] = x[7];
+    dxdt[7] = 0;
+    dxdt[8] = x[9];
+    dxdt[9] = 0;
+}
+
+class Observer {
+public:
+    void operator()(const state_type &amp;current_x, const double current_time) noexcept {
+        x.push_back(current_x);
+        time.push_back(current_time);
+    }
+    std::vector&lt;state_type&gt; x;
+    std::vector&lt;double&gt; time;
+};
+
+typedef runge_kutta_dopri5&lt; std::vector&lt;double&gt; &gt; stepper_type;
+
+std::vector&lt;state_type&gt; integrate(state_type &amp;x, std::vector&lt;double&gt; times) {
+    auto stepper = make_controlled( 1E-12 , 1E-12 , stepper_type() );
+    Observer observer_at_chosen_steps{};
+    integrate_times(stepper, derivatives, x, times, 0.1, std::ref(observer_at_chosen_steps));
+    return observer_at_chosen_steps.x;
+}
+</code></pre><p>Here we successfully used <code>integrate_times</code> - a function from the Boost library.</p>
+<h2 id="fitting-a-function-parameters-using-the-minimization-technique">Fitting a function parameters using the minimization technique</h2>
+<p>The best tool outside of the Python world that I&rsquo;ve found for that problem is the <a href="https://nlopt.readthedocs.io/en/latest/">NLopt</a> library. It&rsquo;s perfect for solving the minimization problem and is similar to the Python&rsquo;s alternative interface.</p>
+<p><img src="/images/Nlopt-logo.png" alt=""></p>
+<h3 id="cooking-the-ios-framework">Cooking the ios framework</h3>
+<p>However, you cannot just include it in the project as we did with Boost.
+You have to wrap the library in a framework. Let&rsquo;s see how to make one.</p>
+<ol>
+<li>
+<p>Check out the git repository: <code>git clone git@github.com:stevengj/nlopt.git</code></p>
+</li>
+<li>
+<p>You need to build it for iOS. Use the toolchain for cmake <a href="https://github.com/leetal/ios-cmake">https://github.com/leetal/ios-cmake</a>.<br>
+Copy the <strong>ios.toolchain.cmake</strong> file to the root directory of the <strong>nlopt</strong> repo</p>
+</li>
+<li>
+<p>Build a combined library - it will run on both an actual device and a simulator:</p>
+</li>
+</ol>
+<pre tabindex="0"><code>cd nlopt
+mkdir build-combined
+cd build-combined
+cmake -DCMAKE_INSTALL_PREFIX=install .. -G Xcode -T buildsystem=1 -DCMAKE_TOOLCHAIN_FILE=../ios.toolchain.cmake -DPLATFORM=OS64COMBINED   
+</code></pre><ol start="4">
+<li>After cmake with the toolchain, open the generated project in XCode, fix signing profiles, and select the development team in <strong>Build Settings</strong> for all targets.</li>
+<li>Set the <strong>Product Bundle Identifier</strong> in the Build Settings where required. You will get these errors if you try to compile the project.</li>
+<li>Build XCode project</li>
+</ol>
+<pre tabindex="0"><code>cmake --build . --config Release
+cmake --install . --config Release
+</code></pre><ol start="7">
+<li>Create the framework. There is the bash script for that. Make sure to correct the paths.</li>
+</ol>
+<pre tabindex="0"><code>export OUT_DIR=&#34;/Users/ivkin/git/nlopt/ios-framework&#34;
+export LIB_NAME=&#34;nlopt&#34;
+export SOURCE_INFO_PLIST=&#34;Info.plist&#34;
+export DYLIBS=&#34;build-simulator/Release-iphonesimulator/libnlopt.0.11.1.dylib&#34;
+export DY_FILE=&#34;libnlopt.0.dylib&#34;
+
+# set OUT_DIR and LIB_NAME
+FW_PATH=&#34;$OUT_DIR/$LIB_NAME.framework&#34;
+INFO_PLIST=&#34;$FW_PATH/Info.plist&#34;
+OUT_DYLIB=&#34;$FW_PATH/$LIB_NAME&#34;
+
+# set the DYLIBS and SOURCE_INFO_PLIST for the library
+mkdir -p &#34;$FW_PATH&#34;
+cp &#34;$SOURCE_INFO_PLIST&#34; &#34;$INFO_PLIST&#34;
+lipo $DYLIBS -output &#34;$OUT_DYLIB&#34; -create
+install_name_tool -id @rpath/$LIB_NAME.framework/$LIB_NAME &#34;$OUT_DYLIB&#34;
+</code></pre><ol start="8">
+<li>Sign the library. You can find a signature in the output of your recent builds. Modify the command to use your path and the signature:</li>
+</ol>
+<pre tabindex="0"><code>codesign --verbose=2 --force --sign EEAXXXXXXXXXXXXXXXXXX4CF1 ~/git/nlopt/ios-framework/nlopt.framework/nlopt
+</code></pre><ol start="9">
+<li>Include the framework in <strong>Target-&gt;Build Phases-&gt;Link Binary With Libraries</strong></li>
+<li>Embed the framework in <strong>Target-&gt;Build Phases-&gt;Embed Frameworks</strong></li>
+<li>For some reason the build will try to use incorrect library name.<br>
+We have to fix it by modifying the library name to lookup during the build. Let&rsquo;s add a build step in <strong>Target-&gt;Build Phases-&gt;Run Script</strong></li>
+</ol>
+<pre tabindex="0"><code>install_name_tool -change @rpath/libnlopt.0.dylib @rpath/nlopt.framework/nlopt &#34;$TARGET_BUILD_DIR/$TARGET_NAME.app/$PRODUCT_NAME&#34;
+</code></pre><ol start="12">
+<li>And the last step is to fix MinimumOSVersion in the <code>Info.plist</code> of the framework.
+<code>MinimumOSVersion = 10.0</code></li>
+</ol>
+<p>Now you can build your project with nlopt framework.</p>
+<h3 id="using-nlopt-framework-in-object-c">Using NLopt framework in Object-C</h3>
+<p>Let&rsquo;s use it in the Obejctive-C code. Here is how I use it to predict the golf ball trajectory by a few known locations:</p>
+<pre tabindex="0"><code>#include &lt;nlopt.hpp&gt;
+
+vector&lt;double&gt; fitCurveParams(vector&lt;cv::Point2d&gt; points, vector&lt;double&gt; times) {
+    nlopt::opt opt(nlopt::LN_NELDERMEAD, 8);
+    std::vector&lt;double&gt; lb(8);
+    lb[0] = -1; // x
+    lb[2] = 0; // y
+    lb[4] = 2; // z
+    lb[1] = -50; // vx
+    lb[3] = 1; // vy
+    lb[5] = 20; // vz
+    lb[6] = -200; // w_i
+    lb[7] = -200; // w_k
+    opt.set_lower_bounds(lb);
+
+    std::vector&lt;double&gt; ub(8);
+    ub[0] = 1;
+    ub[2] = 1;
+    ub[4] = 10;
+    ub[1] = 50;
+    ub[3] = 100;
+    ub[5] = 300;
+    ub[6] = 200;
+    ub[7] = 200;
+    opt.set_upper_bounds(ub);
+    
+    vector&lt;vector&lt;double&gt;&gt; track;
+    for (int i = 0; i &lt; points.size(); i++) {
+        vector&lt;double&gt; point { points[i].x, points[i].y };
+        track.push_back(point);
+    }
+
+    DistanceData data { track, times };
+    opt.set_min_objective(distanceFunc, &amp;data);
+    opt.set_xtol_rel(1e-4);
+    vector&lt;double&gt; x {0, 0, 0, 30, 5, 50, 100, 100};
+    double minf;
+
+    try {
+        nlopt::result result = opt.optimize(x, minf);
+    } catch(std::exception &amp;e) {
+        cout &lt;&lt; &#34;nlopt failed: &#34; &lt;&lt; e.what() &lt;&lt; endl;
+    }
+    return x;
+}
+</code></pre></div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/ios/">ios</a><a class="tag" href="/tags/acetrace/">acetrace</a></span>
+
+
+
+
+      
+    </div>
+
+    
+      <div class="post__subscribe">
+        <a href="https://tinyletter.com/ivkin" target="_blank">
+          Subscribe to this blog
+        </a>
+      </div><div id="comment">
+          <h2>comments</h2>
+          <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-ivkin-dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        Alexander Ivkin
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.602bd2014468bd348112e2aa24f595c530d257a4ed6c335d7baaa6ac9a7ca6fb.js"
+    integrity="sha256-YCvSAURovTSBEuKqJPWVxTDSV6TtbDNde6qmrJp8pvs="
+    crossorigin="anonymous"
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MYZ5L5XZR9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-MYZ5L5XZR9');
+</script>
+</body>
+</html>

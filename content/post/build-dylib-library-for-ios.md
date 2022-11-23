@@ -2,7 +2,10 @@
 include_footer: true
 title: "How to build and use a DyLib in iOS app"
 date: 2022-11-22T21:20:47-05:00
-draft: false
+Description: ""
+Tags: ["ios", "acetrace"]
+Categories: []
+DisableComments: false
 ---
 In [Ace Trace App](https://acetrace.app), I apply different curve fitting algorithms to create a smooth line and draw it in a video.  
 In order to draw a realistic ball golf trajectory, it needs to follow the physics of the ball flight.
