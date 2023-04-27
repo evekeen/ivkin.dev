@@ -26,7 +26,7 @@ Mixpanel proved to be the best analytics dashboard - I constantly develop and mo
 Even the UX/UI of Mixpanel is outstanding - it feels good to even just refresh the dashboard sometimes.
 
 ## Ace Trace - the social feed
-In November, I met Eugeniy Lisovskiy - co-founder of [Level Up Basket](https://levelupbasket.com/).
+In November, I met [Eugeniy Lisovskiy](https://www.linkedin.com/in/lisovskiy/) - co-founder of [Level Up Basket](https://levelupbasket.com/).
 He is definitely a very interesting guy - former CMO of Litres and CEO of Maps.me. Man didn't he tell me a lot of stories about the Russian startup scene!
 We talked a lot about his project - it's a mobile app for basketball.
 In fact, they try to make it the only app for everything basketball related which is in my opinion is a very ambitious goal.
