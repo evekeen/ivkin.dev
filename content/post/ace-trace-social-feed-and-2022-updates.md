@@ -27,8 +27,8 @@ Even the UX/UI of Mixpanel is outstanding - it feels good to even just refresh t
 
 ## Ace Trace - the social feed
 In November, I met Eugeniy Lisovskiy - co-founder of [Level Up Basket](https://levelupbasket.com/).
-He is definitely a very interesting guy - former CEO of Litres and Maps.me. Man didn't he tell me a lot of stories about the Russian startup scene!
-We talked a lot about his project - it's a nmobile app for basketball.
+He is definitely a very interesting guy - former CMO of Litres and CEO of Maps.me. Man didn't he tell me a lot of stories about the Russian startup scene!
+We talked a lot about his project - it's a mobile app for basketball.
 In fact, they try to make it the only app for everything basketball related which is in my opinion is a very ambitious goal.
 
 They have a lot of interesting ideas in their mobile app about retention, and I decided to try some of them out. 
@@ -100,5 +100,9 @@ As usual, I ran an A/B test to measure if there was any difference in user reten
 Unfortunately, the test didn't show any significant improvement in retention; however, it did show degradation in conversion.
 So eventually, I had to terminate the experiment and roll everything back to how it was before that.
 I'm glad I didn't waste too much time on this experiment, and was able to learn a lot from it.
+
+After all I think this was an artificial way to keep users engaged which felt wrong to me since the beginning.
+What I believe in and what I've been taught in multiple startup lessons is to solve the users' problem and find the product-market fit.
+Retention should follow if you do it right.
 
 However, this wasn't the only experiment I've run in the last year. Stay tuned for more updates on my other projects. 
