@@ -6,7 +6,29 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Nov 2022 21:20:47 -0500</lastBuildDate><atom:link href="https://ivkin.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 May 2023 17:19:35 -0400</lastBuildDate><atom:link href="https://ivkin.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Startup Journey: Challenges and the Battle for Intellectual Property</title>
+      <link>https://ivkin.dev/post/my-startup-journey-challenges-and-the-battle-for-intellectual-property/</link>
+      <pubDate>Tue, 16 May 2023 17:19:35 -0400</pubDate>
+      
+      <guid>https://ivkin.dev/post/my-startup-journey-challenges-and-the-battle-for-intellectual-property/</guid>
+      
+        <description>YC Startup School and the co-founder matching platform After completing the YC Startup School last summer, I found myself on a relentless pursuit of a co-founder and an exciting project to join as a technical partner. I figured it would be share the startup journey with someone else. Eager to connect with like-minded entrepreneurs, I turned to a co-founder matching platform that not only provided a platform for collaboration but also organized online matching events.</description>
+      
+    </item>
+    
+    <item>
+      <title>Ace Trace Social Feed and 2022 Updates</title>
+      <link>https://ivkin.dev/post/ace-trace-social-feed-and-2022-updates/</link>
+      <pubDate>Wed, 26 Apr 2023 21:53:12 -0400</pubDate>
+      
+      <guid>https://ivkin.dev/post/ace-trace-social-feed-and-2022-updates/</guid>
+      
+        <description>2022 summary A lot of things have happened in the last year: I&amp;rsquo;ve hired several ML engineers to help me with the object-tracking algorithm. I&amp;rsquo;ve hired two interns. One for computer graphics research and another - for an alternative tracking algorithm research I learned a lot at the YC Startup School. I met a dozen local indie founders from Boston. I met a hundred other founders at the YC cofounder-matching platform.</description>
+      
+    </item>
+    
     <item>
       <title>How to build and use a DyLib in iOS app</title>
       <link>https://ivkin.dev/post/build-dylib-library-for-ios/</link>

@@ -6,7 +6,18 @@
     <description>Recent content in acetrace on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Nov 2022 21:20:47 -0500</lastBuildDate><atom:link href="https://ivkin.dev/tags/acetrace/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Apr 2023 21:53:12 -0400</lastBuildDate><atom:link href="https://ivkin.dev/tags/acetrace/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ace Trace Social Feed and 2022 Updates</title>
+      <link>https://ivkin.dev/post/ace-trace-social-feed-and-2022-updates/</link>
+      <pubDate>Wed, 26 Apr 2023 21:53:12 -0400</pubDate>
+      
+      <guid>https://ivkin.dev/post/ace-trace-social-feed-and-2022-updates/</guid>
+      
+        <description>2022 summary A lot of things have happened in the last year: I&amp;rsquo;ve hired several ML engineers to help me with the object-tracking algorithm. I&amp;rsquo;ve hired two interns. One for computer graphics research and another - for an alternative tracking algorithm research I learned a lot at the YC Startup School. I met a dozen local indie founders from Boston. I met a hundred other founders at the YC cofounder-matching platform.</description>
+      
+    </item>
+    
     <item>
       <title>How to build and use a DyLib in iOS app</title>
       <link>https://ivkin.dev/post/build-dylib-library-for-ios/</link>
@@ -16,6 +27,18 @@
       
         <description>In Ace Trace App, I apply different curve fitting algorithms to create a smooth line and draw it in a video.
 In order to draw a realistic ball golf trajectory, it needs to follow the physics of the ball flight. There are many articles about specific forces affecting the ball. In the end, calculating coordinates at a time point comes down to solving differential equations with these forces and predicting the trajectory by experimental data.</description>
+      
+    </item>
+    
+    <item>
+      <title>Matrices and camera pose estimation</title>
+      <link>https://ivkin.dev/post/matrix-transformations/</link>
+      <pubDate>Thu, 07 Apr 2022 11:16:55 -0400</pubDate>
+      
+      <guid>https://ivkin.dev/post/matrix-transformations/</guid>
+      
+        <description>Camera pose estimation One of the essential features of Ace Trace app (a video editor) is to figure the camera motion as well as zoom changes. This enables the app to pin an object trajectory to a certain point in the physical world coordinate system vs working in the camera viewport.
+The process of estimation of the camera pose is called SLAM (Simultaneous Localization And Mapping), and here we&amp;rsquo;re are going to talk specifically about Visual SLAM, meaning that we&amp;rsquo;re only using the visual information to estimate the camera pose.</description>
       
     </item>
     
