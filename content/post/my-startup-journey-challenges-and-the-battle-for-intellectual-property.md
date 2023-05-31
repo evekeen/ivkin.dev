@@ -151,7 +151,7 @@ future — another red flag.
 
 \- What was I supposed to do? - she said. - I cannot code like you, so I had to hire someone.
 
-You need to learn how to code - learn how to code, bring a technical co-founder, or don't run a software startup.
+If you don't know how to code - learn how to code, bring a technical co-founder, or don't run a software startup.
 
 Anyway, I decided to move on - it's better to do something than argue. After another couple of months of coding, our MVP is almost ready. We had fun!
 I've implemented almost everything that I've planned myself for the launch. We had weekly meetings with the team. The co-founder was super positive
@@ -162,7 +162,7 @@ icebreakers during the meetings and tell what our favorite type of potato was.
 <img src="/images/man-and-dog.jpg" width="300px" style="float: left; padding-right: 20px;">
 
 Once we talked again about the company, I was still curious about the financial situation because if I decided to join it, it would become my problem.
-It turned out that the credit card loan was only part of the whole thing. Also, she inherited $50K and invested them into the company right away. She
+It turned out that the credit card loan was only part of the whole thing. Also, she inherited a significant amount of money and invested them into the company right away. She
 didn't talk much about it, but when I kept asking, she eventually admitted that she was written as an investor there. Another red flag! Before that, I
 had an understanding that we were going to have a 50/50 split of equity between founders, but now it's unclear since on top of 50% of her share, she
 also will have that investment portion. For me, it would not make sense to have less than 50% because I was doing the whole work, and everything she
