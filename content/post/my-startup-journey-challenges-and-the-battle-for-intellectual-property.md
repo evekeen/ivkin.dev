@@ -42,7 +42,6 @@ The survey covers many important topics that could be easily overlooked when try
 * TEAM CULTURE
 * CO-FOUNDER RELATIONSHIP
 
-
 Subsequently, we engaged in several calls to foster a
 deeper understanding of each other's values, aspirations, and work methodologies. The initial signs were incredibly promising; we shared a great
 alignment on fundamental aspects such as company
@@ -107,14 +106,12 @@ didn't show their faces. Honestly, it's a red flag meaning the team did not esta
 Learning she paid salaries to these people made me sick - the quality of their work was garbage, so the first order of business was to offer them to
 work for free for some time as interns. Surprisingly one of them was okay with that. He admitted his lack of skills and was motivated to learn from
 me. The other one just quit. That's how I started re-doing everything. And I started from Lean Canvas, then use cases, then user flow in the app, and
-finally mockups in Figma. It was difficult to even come up with use cases at first since the co-founder could not understand even the concept of use
-case, nor could she speak product management to me. So I did everything myself.
+finally mockups in Figma.
 
 Regrettably, the founder struggled to grasp the essence of use cases and the language of product management, rendering me a one-man show. Although
 daunting, I held my ground, steadfast in my mission to breathe life into this project, one line of code at a time.
 
 # Deep dive into the project
-
 
 <img src="/images/nerdy-boy.jpg" width="300px" style="float: left; padding-right: 20px;">
 
@@ -122,6 +119,13 @@ While working on the product, I started fixing what was broken in the code part.
 plain JavaScript using ReactJS with no TypeScript. In the first couple of weeks, I rewrote 60% code to Typescript, fixing bugs and creating unit tests
 along the way. At the same time, I explained the concept of Storybook to the team, and we created stories for every component we made or touched
 during the development. Finally, I started seeing some structure in the organization.
+
+I've established a process of code review, adding several additional status to our Trello board. I've also brought a team of junior test engineers,
+one of them really stood out BTW, and helped a lot with figuring out what the current state of the product was, as well as creating test plan and test
+cases for future testing.
+
+Pretty quickly the Trello board was not enough, so I've introduced Jira Kanban board to the team. That was it - the "co-founder" was thrilled that she
+could see the project roadmap and the progress of the team. I've also introduced the concept of sprints and weekly planning meetings.
 
 It was hard doing everything myself, and despite one engineer staying as an intern, I soon realized he was not doing anything. I decided to bring
 someone good to the project. One of my ex-co-workers was super interested and just quit his job. I initiated onboarding him to the team. However,
@@ -150,8 +154,8 @@ future — another red flag.
 You need to learn how to code - learn how to code, bring a technical co-founder, or don't run a software startup.
 
 Anyway, I decided to move on - it's better to do something than argue. After another couple of months of coding, our MVP is almost ready. We had fun!
-I've implemented almost everything that I've planned myself for the launch. We had weekly meetings with the team. I bought an outstanding beginner
-testing engineer, and she helped a lot with testing. The co-founder was super positive and did all sorts of good HR stuff, e.g., we would do
+I've implemented almost everything that I've planned myself for the launch. We had weekly meetings with the team. The co-founder was super positive
+and did all sorts of good HR stuff, e.g., we would do
 icebreakers during the meetings and tell what our favorite type of potato was.
 
 
@@ -212,7 +216,7 @@ however, I had to. As I understood, in the best-case scenario, even if she paid 
 settlement and avoid future litigations. Just like that - not only I spent four months for nothing, but now I also have extra trouble and possibly
 need to invest money.
 
-# Lessons Learned 
+# Lessons Learned
 
 <img src="/images/woman-hacking.jpg" width="300px" style="float: left; padding-right: 20px;">
 
@@ -227,7 +231,8 @@ code being mine. On the other hand, now I have an opportunity to sue her later i
 
 We will see how it turns out. And I'm back to creation. Ace Trace has a lot of things to work on; it constantly grows. A lot of cool people around me
 are building something amazing, and it's good to be back. The whole experience is a big lesson to me, which maybe even is worth spending four months
-half time. A very, very valuable lesson. Pepolygraphople can be not how they seem - always do a background check. For example, she had a co-founder before, but
+half time. A very, very valuable lesson. Pepolygraphople can be not how they seem - always do a background check. For example, she had a co-founder
+before, but
 the co-founder left. She claims they left because they found a job in Europe. However, I never checked that story.
 
 <img src="/images/polygraph.jpg" width="300px" style="float: left; padding-right: 20px;">
