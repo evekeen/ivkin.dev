@@ -125,7 +125,7 @@ one of them really stood out BTW, and helped a lot with figuring out what the cu
 cases for future testing.
 
 Pretty quickly the Trello board was not enough, so I've introduced Jira Kanban board to the team. That was it - the "co-founder" was thrilled that she
-could see the project roadmap and the progress of the team. I've also introduced the concept of sprints and weekly planning meetings.
+could see the project roadmap and the progress of the team. I've also introduced the concept of sprints and bi-weekly planning meetings.
 
 It was hard doing everything myself, and despite one engineer staying as an intern, I soon realized he was not doing anything. I decided to bring
 someone good to the project. One of my ex-co-workers was super interested and just quit his job. I initiated onboarding him to the team. However,
