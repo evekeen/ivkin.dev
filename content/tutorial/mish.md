@@ -10,7 +10,7 @@ draft: false
 Все мышиные штуки хранятся в кладовке.
 
 <video muted autoplay loop defaultMuted playsinline  oncontextmenu="return false;"  preload="auto" width="400">
-  <source src="/images/closet.mov">
+  <source src="/images/closet.mp4">
 </video>
 
 # Корм
@@ -18,13 +18,13 @@ draft: false
 Мышка ест в день горсть травяных гранул, можно сыпать от души, он сам знает, сколько ему надо.
 
 <video muted autoplay loop defaultMuted playsinline  oncontextmenu="return false;"  preload="auto" width="400">
-  <source src="/images/pellets.mov">
+  <source src="/images/pellets.mp4">
 </video>
 
 Так же он любит есть сено, но желательно держать его свежим, поэтому больше чем одну среднюю пачку не стоит ему запихивать. Вот как это выглядит:
 
 <video muted autoplay loop defaultMuted playsinline  oncontextmenu="return false;"  preload="auto" width="400">
-  <source src="/images/hay.mov">
+  <source src="/images/hay.mp4">
 </video>
 
 
@@ -35,7 +35,7 @@ draft: false
 Можно просто высыпать старый песок в мусорку, если там слишком все плохо)
 
 <video muted autoplay loop defaultMuted playsinline  oncontextmenu="return false;"  preload="auto" width="400">
-  <source src="/images/dust.mov">
+  <source src="/images/dust.mp4">
 </video>
 
 ## Палочки
@@ -62,5 +62,5 @@ draft: false
 После прогулки, надо оставить дверь максимально широко открытой, так как сюда по утрам заезжает пылесос.
 
 <video muted autoplay loop defaultMuted playsinline  oncontextmenu="return false;"  preload="auto" width="400">
-  <source src="/images/door.mov">
+  <source src="/images/door.mp4">
 </video>
