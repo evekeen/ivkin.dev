@@ -6,7 +6,6 @@ Tags: ["ai", "cinema", "mit", "hackathon"]
 Categories: []
 DisableComments: false
 ---
-# MIT AI Filmmaking Hackathon: A Two-Day Creative Flow
 
 I recently joined the [MIT AI Filmmaking Hackathon](https://mitaifilmhack.com/) — a wild, immersive event that celebrated the art of movement and storytelling under the theme “Dance in Life.” The experience was intense, collaborative, and full of unexpected turns.
 
