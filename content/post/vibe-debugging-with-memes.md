@@ -105,6 +105,8 @@ First let's check if MCP server is working:
 2. Go to the MCP tab
 3. You should see the "meme" server listed there
 
+![](/images/mcp-tab.png)
+
 The **meme** server should have a green dot next to it, indicating that it is active.
 The server should list this tool: `generate_error_meme`.
 
