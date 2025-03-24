@@ -2,7 +2,7 @@
 title: "Vibe Debugging With Memes"
 date: 2025-03-24T14:07:37-04:00
 Description: ""
-Tags: []
+Tags: ["hackathon", "mcp", "mit"]
 Categories: []
 DisableComments: false
 ---
@@ -10,6 +10,10 @@ DisableComments: false
 
 ## Intro
 Last sunday I was hacking at https://www.sundai.club - my favorite community of AI enthusiasts and hackers in Boston!
+
+<a href="https://www.sundai.club" target="_blank">
+  <img src="/images/sundai-club.png" alt="Sundai Club" style="cursor: pointer;"/>
+</a>
 
 It's now my weekly tradition - I start the week with building something fun with talented creative people, and it's better than coffee :)
 
@@ -59,7 +63,7 @@ Reset ImgFlip password for Google accounts:
 
 Open your terminal and run the following commands:
 
-```bash
+```
 git clone https://github.com/sundai-club/error-meme
 cd error-meme
 npm install
@@ -70,7 +74,7 @@ npm run build
 
 Create a global MCP configuration file in your home directory at ~/.cursor/mcp.json. Paste the following configuration, replacing placeholders with your credentials and the correct path to your build:
 
-```json
+```
 {
   "mcpServers": {    
     "meme": {
@@ -101,7 +105,7 @@ First let's check if MCP server is working:
 2. Go to the MCP tab
 3. You should see the "meme" server listed there
 
-The `meme` server should have a green dot next to it, indicating that it is active.
+The **meme** server should have a green dot next to it, indicating that it is active.
 The server should list this tool: `generate_error_meme`.
 
 Everytime you change something in the code, you need to restart the server. Make sure to click the  "Refresh" button on the **meme** server card.
@@ -128,13 +132,19 @@ Error: Cannot find module '/Users/ivkin/git/error-meme/start'
 ```
 
 I can see in the chat that the agent is already generating a meme for me:
-![](/images/meme-1742841025600.png)
+![](/images/cursor-tool-call.png)
+
+
 
 And here is the meme just popped up on my screen:
-![](/images/cursor-tool-call.png)
+![](/images/meme-1742841025600.png)
+
+
 
 In the meantime, the agent continue to fix the error:
 ![](/images/cursor-after-tool.png)
+
+
 
 ### Final words
 
