@@ -38,7 +38,6 @@ This architectural planning session, though it took about an hour of our hackath
 **Fashion Search** is an AI-powered style recommendation platform that allows users to upload images reflecting their preferred fashion aesthetics, describe their desired style, and receive targeted outfit recommendations ([GitHub - evekeen/fashion_search](https://github.com/evekeen/fashion_search#:~:text=)). In essence, it's like having a personal stylist and shopper powered by AI. The app's core goals and features include:
 
 - **Inspiration Uploads:** Users can upload reference photos of outfits or items they like. These images help define the user's style preferences (e.g. boho, streetwear, minimalist).
-![](/images/fashion-look1.jpg)
 - **Style Description:** Users fill a short form describing what they're looking for – for example, *"I need a spring outfit with a casual vibe, budget-friendly, for a male 20s"*. They can also provide attributes like preferred colors, gender, or occasion.
 - **AI-Generated Look:** The app uses an AI image model to **visualize a recommended outfit** that matches the user's description. This helps the user *see* the style suggestion.
 - **Shopping Recommendations:** In parallel, the app searches online for real clothing items (jacket, top, pants, shoes, etc.) that fit the described look. It then presents a curated list of products by category, so the user can shop the complete outfit.
@@ -79,6 +78,8 @@ One of the most exciting aspects of building Fashion Search was how we leveraged
 - **Design Exploration:** We would draft web app layouts using these AI design tools, experimenting with different component arrangements and visual styles. The tools would generate complete, functional UI mockups that we could instantly visualize.
 
 - **Screenshot to Implementation:** When we found a design we liked, we'd take a screenshot and use Cursor to transform our existing code to match the new layout. The AI would understand the visual changes and implement them in our Next.js components.
+
+![](/images/fashion-screenshot2.jpg)
 
 - **Team Collaboration:** Our team could quickly iterate through designs together. One person would generate a design idea, we'd discuss it, and then implement it within minutes using AI assistance. This rapid feedback loop was crucial for our one-day hackathon timeline.
 
