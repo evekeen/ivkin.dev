@@ -6,16 +6,15 @@ Tags: ["ai", "hackathon"]
 Categories: []
 DisableComments: false
 ---
-
-# Fashion Search: AI-Powered Style Discovery in One Day
-
 **Launch Date:** April 6, 2025 (Sundai Club Hackathon)  
 **Tagline:** *"The Perplexity for Fashion. Discover your style. Visualize your look. This is fashion discovery, redefined."* ([All Projects - Sundai Club](https://www.sundai.club/projects#:~:text=The%20Perplexity%20for%20Fashion,This%20is%20fashion%20discovery%2C%20redefined))
 
 ## From Cybersecurity Theme to a Fashionable Pivot
 
 Last Sunday, I participated in a one-day hackathon at **Sundai.club** – a weekly AI hackers' meetup in Boston. The official theme was cybersecurity, sponsored by an AI security company. However, I teamed up with a fun group of fellow hackers and we decided to pivot to something more playful: an AI-driven fashion search engine. 
-Aftwr all sundai is not just about smart engineers and using AI, but also about being frolic, which aligns with my values a lot 🙂
+After all sundai is not just about smart engineers and using AI, but also about being frolic, which aligns with my values a lot 🙂
+![](/images/fashion-team.jpg)
+
 We wanted to build *"the Perplexity for Fashion"* – essentially a specialized AI assistant for style advice ([All Projects - Sundai Club](https://www.sundai.club/projects#:~:text=The%20Perplexity%20for%20Fashion,This%20is%20fashion%20discovery%2C%20redefined)). The result of our 8-hour sprint was **Fashion Search**, an app that lets users discover new outfits and shop for recommended looks via AI.
 
 This hackathon project was a series of firsts for me: my first time using **Next.js** for a full-stack app and my first deployment on **Vercel**. Despite the learning curve, Next.js proved to be a great fit for rapidly building both the frontend and backend API in one project. By the end of the day, we had a live demo running on Vercel ([GitHub - evekeen/fashion_search](https://github.com/evekeen/fashion_search#:~:text=)), complete with user authentication, an AI-powered recommendation engine, and real product search integration.
@@ -39,6 +38,7 @@ This architectural planning session, though it took about an hour of our hackath
 **Fashion Search** is an AI-powered style recommendation platform that allows users to upload images reflecting their preferred fashion aesthetics, describe their desired style, and receive targeted outfit recommendations ([GitHub - evekeen/fashion_search](https://github.com/evekeen/fashion_search#:~:text=)). In essence, it's like having a personal stylist and shopper powered by AI. The app's core goals and features include:
 
 - **Inspiration Uploads:** Users can upload reference photos of outfits or items they like. These images help define the user's style preferences (e.g. boho, streetwear, minimalist).
+![](/images/fashion-look1.jpg)
 - **Style Description:** Users fill a short form describing what they're looking for – for example, *"I need a spring outfit with a casual vibe, budget-friendly, for a male 20s"*. They can also provide attributes like preferred colors, gender, or occasion.
 - **AI-Generated Look:** The app uses an AI image model to **visualize a recommended outfit** that matches the user's description. This helps the user *see* the style suggestion.
 - **Shopping Recommendations:** In parallel, the app searches online for real clothing items (jacket, top, pants, shoes, etc.) that fit the described look. It then presents a curated list of products by category, so the user can shop the complete outfit.
@@ -65,12 +65,16 @@ As shown in the architecture diagram above, **Fashion Search** connects to a sui
   
   We experimented with all three models given time constraints. The backend would send the outfit description prompt to a model and get back the generated image. We found that **Stable Diffusion** (with the right prompt tuning) and **Flux-Pro** produced the most stylish and relevant outfit renderings. DALL·E didn't not impress me. The generated image is then displayed in the results as a "AI-crafted outfit inspiration."
 
+![](/images/fashion-style1.jpg)
+
 - **Google Shopping Search (Serper.dev):** To find real products matching the outfit, we needed a way to query Google Shopping or another product database. This turned out to be one of the hardest parts of the project. We initially considered official APIs or scrapers (like SerpApi, which we noted in our plan ([GitHub - evekeen/fashion_search](https://github.com/evekeen/fashion_search#:~:text=,Data%20Storage%3A%20Redis))), but many were paid or complex to use. We eventually settled on **Serper.dev**, which markets itself as *"the world's fastest & cheapest Google Search API"* ([Serper - The World's Fastest and Cheapest Google Search API](https://serper.dev#:~:text=The%20World%27s%20Fastest%20%26%20Cheapest,Google%20Search%20API)). Serper's API allowed us to perform a live Google Shopping query for each clothing item. For example, for "light denim jacket men" it returns a list of products with titles, prices, and images. We integrated these results into our app, showing a list of actual items (with links to the stores) for each recommended outfit component.
 - **Redis:** We used a cloud Redis instance to store user search history and enforce rate limiting. Since the external APIs (OpenAI, etc.) have usage caps, we limited each user to a certain number of searches per day. Redis stored a simple counter per user and cached recent results. This is also useful for not repeating the OpenAI call if the user refreshes the page with the same query, for example. In a hackathon setting, setting up Redis was quick (using Upstash free tier), and it gave us persistence without setting up a full database.
 
 ## Rapid Design Iteration with AI
 
 One of the most exciting aspects of building Fashion Search was how we leveraged AI tools for rapid design iteration. We used **Lovable** and **v0.dev** to quickly prototype different UI layouts and design ideas. This workflow was incredibly efficient:
+
+![](/images/fashion-screenshot1.jpg)
 
 - **Design Exploration:** We would draft web app layouts using these AI design tools, experimenting with different component arrangements and visual styles. The tools would generate complete, functional UI mockups that we could instantly visualize.
 
@@ -103,6 +107,8 @@ This post-hackathon work highlighted an important truth about hackathons: while 
 Building **Fashion Search** in a day was intense and came with a few challenges worth noting:
 
 - **Figuring out the right image generation model:** We had to ensure the prompts we generated for the image models were specific and style-oriented (e.g., *"photo of a man wearing a light blue denim jacket, white t-shirt, khaki chinos, white sneakers, streetwear style"*). Each model had different prompt strengths – for instance, Stable Diffusion needed more detail to avoid generic results, whereas DALL·E sometimes needed style keywords removed to not confuse it. Despite a few hiccups (some models hallucinated with weird images), the flux model provided reliable results consistently.
+
+![](/images/fashion-style2.jpg)
 
 - **Google Shopping API Workarounds:** The search integration was the trickiest part. **Serper.dev** allowed us to fetch Google Shopping results without heavy cost (it offers 2,500 free queries, which was plenty for a demo). However, the downside was **image quality**. The product images returned by Serper are Google's compressed thumbnails (from `encrypted-tbn0.gstatic.com` URLs), which are quite small. In our app, the product pictures appeared a bit pixelated and low-resolution – not ideal for a visually-driven fashion app. We noted this as a trade-off for using a free/cheap service. In the future, we'd consider either upgrading to a paid API that gives higher-res images or implementing a secondary step to fetch better images from the product page. For the hackathon demo, we accepted the thumbnail quality in exchange for having *real* shoppable items listed instantly.
 
