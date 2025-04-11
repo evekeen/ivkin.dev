@@ -136,7 +136,8 @@ All in all, **Fashion Search** was a success for a hackathon project. It was dem
 
 **Links:**
 
-- 📝 **Project Page:** [Sundai Club – Fashion Searc ([All Projects - Sundai Club](https://www.sundai.club/projects#:~:text=The%20Perplexity%20for%20Fashion,This%20is%20fashion%20discovery%2C%20redefined))】](https://www.sundai.club/projects/cef5b417-173f-4000-9eae-28155847b873)  
+- 📝 **Project Page:** [Sundai Club – Fashion Search](https://www.sundai.club/projects/cef5b417-173f-4000-9eae-28155847b873)  
+- 🤖 **Sundai Club** [All Projects - Sundai Club](https://www.sundai.club/projects]
 - 💻 **GitHub Repository:** [evekeen/fashion_search](https://github.com/evekeen/fashion_search) (code and README)  
 - 🌐 **Live Demo:** [fashion-sundai.vercel.app](https://fashion-sundai.vercel.app) – *AI Fashion Search Engine*  
 - 🔍 **Serper API:** [Serper.dev](https://serper.dev) – *Google Search API we used for product results*
