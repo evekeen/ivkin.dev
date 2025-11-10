@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const experiences = [
+  {
+    period: "August 2025 – Present",
+    company: "Winrate.com",
+    role: "Head of Product Development",
+    description: "Lead AI agent product development and full-stack engineering for a next-generation sales enablement platform. Manage a team of four engineers and oversee product management, roadmap, and delivery.",
+    achievements: [
+      "Built AI agent workflows for automated account research and meeting preparation using LangGraph/LangChain",
+      "Designed scalable backend on AWS (Lambda, CDK, API Gateway, PostgreSQL)",
+      "Developed real-time AI chat and streaming interfaces in React/TypeScript",
+      "Integrated CRM data pipelines and vector search for semantic enrichment"
+    ]
+  },
+  {
+    period: "January 2024 – Present",
+    company: "Enabled Health Inc",
+    role: "Co-founder, CTO",
+    description: "AI physical therapy trainer for hospitals. Won MA challenge grant. Raised $200k of funding. Launched two hospital pilots.",
+    achievements: [
+      "Built and launched an iOS bedside trainer app integrating computer vision–based engagement tracking and exercise guidance for hospitalized patients",
+      "Designed and implemented a voice AI agent in production to communicate with patients, deliver exercise prompts, and collect feedback",
+      "Led R&D of new computer vision algorithms for body-pose estimation and motion tracking",
+      "Manage a mixed remote and on-site team of engineers, UX and motion designers, and data analysts",
+      "80% of new code is written by AI agents (Claude Code, Cursor, etc)"
+    ]
+  },
+  {
+    period: "April 2021 – July 2025",
+    company: "Ace Trace",
+    role: "Founder",
+    description: "Launched a mobile sports video editor app for iOS and Android. 6000 paid customers on a subscription model. AppStore rating of 4.4 with more than 1.1K reviews. MRR $15K. Successfully exited through acquisition.",
+    achievements: [
+      "Created and maintained a custom computer vision model that traces golf-ball flight in video",
+      "Grew to 6,000 paying subscribers and ~20,000 monthly installs on iOS/Android; fully bootstrapped",
+      "Automated marketing partnership outreach by developing an AI agent that targets and drafts personalized messages to golf influencers",
+      "Produce and edit marketing videos using generative AI tools (Runway, Veo, Sora)"
+    ]
+  },
+  {
+    period: "April 2019 – March 2022",
+    company: "ALM Works, Inc.",
+    role: "Leading Software Developer",
+    description: "Lead the development of Structure.Gantt to support working on-premises and later created the cloud version. Set up new development processes for teams and contributed significantly to the Structure product.",
+    achievements: [
+      "Researched and shipped an MVP of a new product, 'Cross-Team PI Planner' as part of the Structure Innovations team",
+      "Led architectural design and code review processes",
+      "Conducted customer interviews and created product roadmaps",
+      "Presented company products at corporate events"
+    ]
+  }
+];
+
+const skills = {
+  "AI & Machine Learning": [
+    "Voice agents and chatbots using LLMs",
+    "Computer vision (pose estimation, object tracking)",
+    "Image and video generation",
+    "TensorFlow Lite, PyTorch",
+    "LangGraph/LangChain for AI workflows"
+  ],
+  "Mobile Development": [
+    "Swift, SwiftUI",
+    "Kotlin, Jetpack Compose",
+    "React Native, Flutter",
+    "iOS and Android native development"
+  ],
+  "Backend & Cloud": [
+    "Python, Java, Kotlin",
+    "Node.js, TypeScript",
+    "AWS (Lambda, CDK, API Gateway)",
+    "Google Cloud, Firebase",
+    "PostgreSQL, MongoDB",
+    "Docker, REST APIs"
+  ],
+  "Frontend": [
+    "React, Redux",
+    "TypeScript",
+    "Real-time streaming interfaces",
+    "Modern responsive design",
+    "UX design"
+  ]
+};
+---
+
+<BaseLayout
+  title="Book Consulting - Alexander Ivkin"
+  description="CTO and software engineer with 15+ years of experience building AI-powered products. Available for consulting on AI/ML, mobile apps, and product development."
+>
+  <div class="flex flex-col min-h-screen bg-gray-50 dark:bg-[#0a0a0a]">
+    <Header />
+
+    <main class="flex-1">
+      <!-- Hero Section -->
+      <section class="max-w-6xl mx-auto px-6 py-20">
+        <div class="max-w-4xl">
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">
+            Let's Build Something<br/>Amazing Together
+          </h1>
+          <p class="text-xl sm:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8 max-w-3xl">
+            CTO and software engineer with 15+ years of experience building AI-powered products, mobile applications, and leading cross-functional teams.
+          </p>
+          <div class="flex gap-4 flex-wrap">
+            <a
+              href="https://calendly.com/ivkindev/1-hour"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-2 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold rounded-xl hover:scale-105 transition-transform shadow-lg text-lg"
+            >
+              Get in Touch
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+            <a
+              href="/"
+              class="inline-flex items-center gap-2 px-8 py-4 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-gray-900 dark:hover:border-white hover:text-gray-900 dark:hover:text-white transition-colors text-lg"
+            >
+              ← Back Home
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Expertise Section -->
+      <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-3xl p-8 sm:p-12 border-2 border-gray-200 dark:border-gray-800 shadow-xl">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-8">What I Bring to the Table</h2>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div>
+              <div class="text-4xl mb-4">🤖</div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">AI & Machine Learning</h3>
+              <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Production-grade voice agents, computer vision systems, and LLM-powered workflows. From research to deployment.
+              </p>
+            </div>
+            <div>
+              <div class="text-4xl mb-4">📱</div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Mobile Excellence</h3>
+              <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Native iOS/Android apps with Swift, Kotlin, and cross-platform solutions. Built apps with 6K+ paying subscribers.
+              </p>
+            </div>
+            <div>
+              <div class="text-4xl mb-4">🚀</div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Product & Leadership</h3>
+              <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                End-to-end product development, team leadership, fundraising, and go-to-market strategy. Founded and exited startups.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Timeline -->
+      <section class="max-w-6xl mx-auto px-6 py-16">
+        <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-12">Experience</h2>
+        <div class="space-y-8">
+          {experiences.map((exp) => (
+            <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-xl transition-shadow">
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-2">
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">{exp.role}</h3>
+                  <p class="text-lg text-blue-600 dark:text-blue-400 font-semibold">{exp.company}</p>
+                </div>
+                <span class="text-sm font-mono text-gray-600 dark:text-gray-400 whitespace-nowrap">{exp.period}</span>
+              </div>
+              <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                {exp.description}
+              </p>
+              <div class="space-y-2">
+                {exp.achievements.map((achievement) => (
+                  <div class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-green-500 dark:text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">{achievement}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Technical Skills -->
+      <section class="max-w-6xl mx-auto px-6 py-16">
+        <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-12">Technical Skills</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          {Object.entries(skills).map(([category, items]) => (
+            <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-800 shadow-lg">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">{category}</h3>
+              <ul class="space-y-3">
+                {items.map((skill) => (
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-blue-500 dark:text-blue-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700 dark:text-gray-300">{skill}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Booking Section -->
+      <section class="max-w-6xl mx-auto px-6 py-16 mb-16">
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 sm:p-12 shadow-2xl border-2 border-gray-200 dark:border-gray-800">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">Book a Consultation</h2>
+            <p class="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
+              Schedule a 1-hour consultation to discuss your project. Whether you need help with AI integration, mobile app development, or product strategy, I'm here to help.
+            </p>
+          </div>
+
+          <!-- Calendly inline widget begin -->
+          <div class="calendly-inline-widget" data-url="https://calendly.com/ivkindev/1-hour" style="min-width:320px;height:700px;"></div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          <!-- Calendly inline widget end -->
+
+          <div class="text-center mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <p class="text-gray-600 dark:text-gray-400 mb-4">Or reach out directly:</p>
+            <a
+              href="mailto:alex@ivkin.dev"
+              class="group inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline text-lg font-semibold"
+            >
+              alex@ivkin.dev
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>

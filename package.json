@@ -1,0 +1,23 @@
+{
+  "name": "ivkin.dev",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/rss": "^4.0.9",
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^5.1.2",
+    "@tailwindcss/typography": "^0.5.15",
+    "astro": "^5.0.2",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.7.2"
+  }
+}
