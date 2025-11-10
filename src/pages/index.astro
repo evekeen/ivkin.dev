@@ -258,70 +258,84 @@ const featuredPosts = allPosts.slice(0, 6);
     50% { opacity: 0; }
   }
 
-  /* Glowing text animation */
+  /* Glowing text animation - EXTREME glow effect */
   .glow-char {
-    display: inline-block;
-    animation: textGlow 2s ease-in-out;
+    display: inline-block !important;
+    animation: textGlow 2s ease-in-out !important;
   }
 
   @keyframes textGlow {
-    0%, 20% {
+    0%, 30% {
       text-shadow:
+        0 0 5px rgba(59, 130, 246, 1),
+        0 0 10px rgba(59, 130, 246, 1),
         0 0 20px rgba(59, 130, 246, 1),
-        0 0 40px rgba(59, 130, 246, 0.8),
-        0 0 60px rgba(59, 130, 246, 0.6),
-        0 0 80px rgba(147, 51, 234, 0.5),
-        0 0 100px rgba(147, 51, 234, 0.3);
-      color: rgb(96, 165, 250);
-      transform: scale(1.05);
+        0 0 40px rgba(59, 130, 246, 1),
+        0 0 80px rgba(59, 130, 246, 0.8),
+        0 0 120px rgba(147, 51, 234, 0.6),
+        0 0 160px rgba(147, 51, 234, 0.4) !important;
+      color: #3b82f6 !important;
+      filter: brightness(1.5) !important;
+      transform: scale(1.15) !important;
     }
-    50% {
+    60% {
       text-shadow:
-        0 0 25px rgba(59, 130, 246, 1),
-        0 0 50px rgba(59, 130, 246, 0.9),
-        0 0 75px rgba(59, 130, 246, 0.7),
-        0 0 100px rgba(147, 51, 234, 0.6),
-        0 0 125px rgba(147, 51, 234, 0.4);
-      color: rgb(59, 130, 246);
-      transform: scale(1.1);
+        0 0 8px rgba(59, 130, 246, 1),
+        0 0 15px rgba(59, 130, 246, 1),
+        0 0 30px rgba(59, 130, 246, 1),
+        0 0 60px rgba(59, 130, 246, 1),
+        0 0 100px rgba(59, 130, 246, 0.9),
+        0 0 140px rgba(147, 51, 234, 0.7),
+        0 0 180px rgba(147, 51, 234, 0.5) !important;
+      color: #60a5fa !important;
+      filter: brightness(1.8) !important;
+      transform: scale(1.2) !important;
     }
     100% {
-      text-shadow: none;
-      color: inherit;
-      transform: scale(1);
+      text-shadow: none !important;
+      color: inherit !important;
+      filter: brightness(1) !important;
+      transform: scale(1) !important;
     }
   }
 
   /* Dark mode adjustments for glow */
   :global(.dark) .glow-char {
-    animation: textGlowDark 2s ease-in-out;
+    animation: textGlowDark 2s ease-in-out !important;
   }
 
   @keyframes textGlowDark {
-    0%, 20% {
+    0%, 30% {
       text-shadow:
+        0 0 5px rgba(147, 197, 253, 1),
+        0 0 10px rgba(147, 197, 253, 1),
         0 0 20px rgba(96, 165, 250, 1),
-        0 0 40px rgba(96, 165, 250, 0.9),
-        0 0 60px rgba(96, 165, 250, 0.7),
-        0 0 80px rgba(168, 85, 247, 0.6),
-        0 0 100px rgba(168, 85, 247, 0.4);
-      color: rgb(147, 197, 253);
-      transform: scale(1.05);
+        0 0 40px rgba(96, 165, 250, 1),
+        0 0 80px rgba(96, 165, 250, 0.9),
+        0 0 120px rgba(168, 85, 247, 0.7),
+        0 0 160px rgba(168, 85, 247, 0.5) !important;
+      color: #93c5fd !important;
+      filter: brightness(1.8) !important;
+      transform: scale(1.15) !important;
     }
-    50% {
+    60% {
       text-shadow:
-        0 0 25px rgba(96, 165, 250, 1),
-        0 0 50px rgba(96, 165, 250, 1),
-        0 0 75px rgba(96, 165, 250, 0.8),
-        0 0 100px rgba(168, 85, 247, 0.7),
-        0 0 125px rgba(168, 85, 247, 0.5);
-      color: rgb(96, 165, 250);
-      transform: scale(1.1);
+        0 0 8px rgba(147, 197, 253, 1),
+        0 0 15px rgba(147, 197, 253, 1),
+        0 0 30px rgba(96, 165, 250, 1),
+        0 0 60px rgba(96, 165, 250, 1),
+        0 0 100px rgba(96, 165, 250, 1),
+        0 0 140px rgba(168, 85, 247, 0.8),
+        0 0 180px rgba(168, 85, 247, 0.6) !important;
+      color: #60a5fa !important;
+      filter: brightness(2) !important;
+      transform: scale(1.2) !important;
     }
     100% {
-      text-shadow: none;
-      color: inherit;
-      transform: scale(1);
+      text-shadow: none !important;
+      color: inherit !important;
+      filter: brightness(1) !important;
+      transform: scale(1) !important;
     }
   }
 </style>
@@ -331,9 +345,13 @@ const featuredPosts = allPosts.slice(0, 6);
   const typingText = document.getElementById('typing-text');
   const cursor = document.getElementById('typing-cursor');
 
+  console.log('Typing animation initialized:', { typingText, cursor });
+
   if (typingText && cursor) {
     const fullText = typingText.getAttribute('data-text') || '';
     let currentIndex = 0;
+
+    console.log('Starting typing animation for:', fullText);
 
     function typeCharacter() {
       if (currentIndex < fullText.length && typingText) {
@@ -348,6 +366,7 @@ const featuredPosts = allPosts.slice(0, 6);
           // Apply glow animation only to the newly typed character
           if (i === currentIndex) {
             span.className = 'glow-char';
+            console.log('Applied glow to character:', fullText[i], 'at index:', i);
           }
 
           typingText.appendChild(span);
@@ -357,6 +376,7 @@ const featuredPosts = allPosts.slice(0, 6);
         setTimeout(typeCharacter, 50); // Typing speed: 50ms per character
       } else if (cursor) {
         // Hide cursor after typing is complete
+        console.log('Typing complete');
         setTimeout(() => {
           cursor.style.display = 'none';
         }, 500);
@@ -365,6 +385,8 @@ const featuredPosts = allPosts.slice(0, 6);
 
     // Start typing after a brief delay
     setTimeout(typeCharacter, 500);
+  } else {
+    console.error('Could not find typing elements');
   }
 
   // Scroll-triggered animations using Intersection Observer
