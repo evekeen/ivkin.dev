@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="canonical" href="https://ivkin.dev/blog/build-dylib-library-for-ios/"><title>How to build and use a DyLib in iOS app - Alexander Ivkin</title><meta name="description" content="How to build and use a DyLib in iOS app"><!-- Favicon --><link rel="icon" type="image/x-icon" href="/favicon.ico"><!-- Open Graph --><meta property="og:title" content="How to build and use a DyLib in iOS app - Alexander Ivkin"><meta property="og:description" content="How to build and use a DyLib in iOS app"><meta property="og:url" content="https://ivkin.dev/blog/build-dylib-library-for-ios/"><meta property="og:type" content="website"><!-- Twitter --><meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@alexivkin"><meta name="twitter:title" content="How to build and use a DyLib in iOS app - Alexander Ivkin"><meta name="twitter:description" content="How to build and use a DyLib in iOS app"><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"><!-- Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-MYZ5L5XZR9"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MYZ5L5XZR9');
+    </script><!-- Dark mode script --><script>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      window.localStorage.setItem('theme', theme);
+    </script><link rel="stylesheet" href="/_astro/_slug_.DyU8ZErl.css">
+<style>.prose[data-astro-cid-7jjqptxk]{--tw-text-opacity: 1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.prose[data-astro-cid-7jjqptxk]:is(.dark *){--tw-text-opacity: 1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.prose[data-astro-cid-7jjqptxk] h1,.prose[data-astro-cid-7jjqptxk] h2,.prose[data-astro-cid-7jjqptxk] h3,.prose[data-astro-cid-7jjqptxk] h4{--tw-text-opacity: 1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.prose[data-astro-cid-7jjqptxk] h1:is(.dark *),.prose[data-astro-cid-7jjqptxk] h2:is(.dark *),.prose[data-astro-cid-7jjqptxk] h3:is(.dark *),.prose[data-astro-cid-7jjqptxk] h4:is(.dark *){--tw-text-opacity: 1;color:rgb(243 244 246 / var(--tw-text-opacity, 1))}.prose[data-astro-cid-7jjqptxk] a{--tw-text-opacity: 1;color:rgb(37 99 235 / var(--tw-text-opacity, 1));text-decoration-line:none}.prose[data-astro-cid-7jjqptxk] a:hover{text-decoration-line:underline}.prose[data-astro-cid-7jjqptxk] a:is(.dark *){--tw-text-opacity: 1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.prose[data-astro-cid-7jjqptxk] code{border-radius:.25rem;--tw-bg-opacity: 1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1));padding:.125rem .375rem;font-size:.875rem;line-height:1.25rem}.prose[data-astro-cid-7jjqptxk] code:is(.dark *){--tw-bg-opacity: 1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.prose[data-astro-cid-7jjqptxk] pre{overflow-x:auto;border-radius:.5rem;--tw-bg-opacity: 1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1));padding:1rem}.prose[data-astro-cid-7jjqptxk] pre:is(.dark *){--tw-bg-opacity: 1;background-color:rgb(3 7 18 / var(--tw-bg-opacity, 1))}.prose[data-astro-cid-7jjqptxk] pre code{background-color:transparent;padding:0;--tw-text-opacity: 1;color:rgb(243 244 246 / var(--tw-text-opacity, 1))}.prose[data-astro-cid-7jjqptxk] blockquote{border-left-width:4px;--tw-border-opacity: 1;border-color:rgb(37 99 235 / var(--tw-border-opacity, 1));padding-left:1rem;font-style:italic}.prose[data-astro-cid-7jjqptxk] blockquote:is(.dark *){--tw-border-opacity: 1;border-color:rgb(96 165 250 / var(--tw-border-opacity, 1))}
+</style></head> <body class="min-h-screen">  <div class="flex flex-col min-h-screen" data-astro-cid-7jjqptxk> <header class="sticky top-0 z-50 backdrop-blur-sm bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800"> <nav class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex justify-between items-center h-16"> <a href="/" class="font-bold text-xl hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+Alexander Ivkin
+</a> <div class="flex items-center gap-6"> <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors ">
+Home
+</a> <a href="/blog" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-blue-600 dark:text-blue-400 font-semibold">
+Blog
+</a> <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="Toggle theme"> <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"> <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path> </svg> <svg class="w-5 h-5 dark:hidden" fill="currentColor" viewBox="0 0 20 20"> <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path> </svg> </button> </div> </div> </nav> </header> <script type="module">const t=document.getElementById("theme-toggle");t?.addEventListener("click",()=>{const e=document.documentElement.classList.toggle("dark");localStorage.setItem("theme",e?"dark":"light")});</script> <main class="flex-1" data-astro-cid-7jjqptxk> <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16" data-astro-cid-7jjqptxk> <header class="mb-12" data-astro-cid-7jjqptxk> <a href="/blog" class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline mb-8" data-astro-cid-7jjqptxk>
+← Back to blog
+</a> <h1 class="text-4xl sm:text-5xl font-bold mb-4" data-astro-cid-7jjqptxk> How to build and use a DyLib in iOS app </h1> <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-400" data-astro-cid-7jjqptxk> <time data-astro-cid-7jjqptxk>November 23, 2022</time> <span data-astro-cid-7jjqptxk>•</span> <span data-astro-cid-7jjqptxk>5 min read</span>  <span data-astro-cid-7jjqptxk>•</span> <div class="flex gap-2" data-astro-cid-7jjqptxk> <a href="/blog/tag/ios" class="text-blue-600 dark:text-blue-400 hover:underline" data-astro-cid-7jjqptxk>
+#ios </a><a href="/blog/tag/acetrace" class="text-blue-600 dark:text-blue-400 hover:underline" data-astro-cid-7jjqptxk>
+#acetrace </a> </div>  </div> </header> <div class="prose prose-lg dark:prose-invert max-w-none" data-astro-cid-7jjqptxk> <p>In <a href="https://acetrace.app">Ace Trace App</a>, I apply different curve fitting algorithms to create a smooth line and draw it in a video.<br/>
+In order to draw a realistic ball golf trajectory, it needs to follow the physics of the ball flight.
+<img src="/images/golf_ball_forces.jpg" alt/></p>
+<p>There are many articles about specific forces affecting the ball. In the end, calculating coordinates at a time point comes down to solving differential equations with these forces and predicting the trajectory by experimental data.
+<img src="/images/golf_ball_trajectories.png" alt/>
+It’s common to experiment with data and algorithms using Python and tools like SciPy; however, to run these algorithms on a mobile device, they must be written in a native language.<br/>
+My primary platform is iOS, and there is no good tool available for curve fitting either in the standard library or in some package on Github. I came across a few  C++ libraries that can be very useful for curve fitting.</p>
+<h2 id="solving-differential-equations-with-boost">Solving differential equations with Boost</h2>
+<p>There is <a href="https://www.boost.org/">Boost’s</a> module <strong>odeint</strong> for differential equations, which is the exact equivalent of what you might have used in Python.<br/>
+And the good news is Boost can be installed on macOS and then included in a build without any additional hassle:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>brew install boost</span></span></code></pre>
+<p>Add the corresponding path to <strong>Headers Search Paths</strong> to XCode project targets: <code>/opt/homebrew/Cellar/boost/1.80.0/include</code><br/>
+Add the path to the <strong>Library Search Paths</strong> as well: <code>/opt/homebrew/Cellar/boost/1.80.0/lib</code><br/>
+And then, you can use it in Objective-C code. Here is how I solve differential equations for the trajectory:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>#include &lt;boost/numeric/odeint.hpp&gt;</span></span>
+<span class="line"><span>using namespace boost::numeric::odeint;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>void derivatives(const state_type &amp;x, state_type &amp; dxdt, double t) {</span></span>
+<span class="line"><span>    auto w_i = x[7];</span></span>
+<span class="line"><span>    auto w_k = x[9];</span></span>
+<span class="line"><span>    dxdt[0] = x[1];</span></span>
+<span class="line"><span>    dxdt[1] = -(d / m) * x[1] * x[1] + coef * (w_j * x[5] - w_k * x[3]);    </span></span>
+<span class="line"><span>    dxdt[2] = x[3];</span></span>
+<span class="line"><span>    dxdt[3] = -32.2 - (d / m) * x[3] * x[3] + coef * (w_k * x[1] - w_i * x[5]);    </span></span>
+<span class="line"><span>    dxdt[4] = x[5];</span></span>
+<span class="line"><span>    dxdt[5] = -(d / m) * x[5] * x[5] + coef * (w_i * x[3] - w_j * x[1]);</span></span>
+<span class="line"><span>    dxdt[6] = x[7];</span></span>
+<span class="line"><span>    dxdt[7] = 0;</span></span>
+<span class="line"><span>    dxdt[8] = x[9];</span></span>
+<span class="line"><span>    dxdt[9] = 0;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>class Observer {</span></span>
+<span class="line"><span>public:</span></span>
+<span class="line"><span>    void operator()(const state_type &amp;current_x, const double current_time) noexcept {</span></span>
+<span class="line"><span>        x.push_back(current_x);</span></span>
+<span class="line"><span>        time.push_back(current_time);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    std::vector&lt;state_type&gt; x;</span></span>
+<span class="line"><span>    std::vector&lt;double&gt; time;</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>typedef runge_kutta_dopri5&lt; std::vector&lt;double&gt; &gt; stepper_type;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>std::vector&lt;state_type&gt; integrate(state_type &amp;x, std::vector&lt;double&gt; times) {</span></span>
+<span class="line"><span>    auto stepper = make_controlled( 1E-12 , 1E-12 , stepper_type() );</span></span>
+<span class="line"><span>    Observer observer_at_chosen_steps{};</span></span>
+<span class="line"><span>    integrate_times(stepper, derivatives, x, times, 0.1, std::ref(observer_at_chosen_steps));</span></span>
+<span class="line"><span>    return observer_at_chosen_steps.x;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>Here we successfully used <code>integrate_times</code> - a function from the Boost library.</p>
+<h2 id="fitting-a-function-parameters-using-the-minimization-technique">Fitting a function parameters using the minimization technique</h2>
+<p>The best tool outside of the Python world that I’ve found for that problem is the <a href="https://nlopt.readthedocs.io/en/latest/">NLopt</a> library. It’s perfect for solving the minimization problem and is similar to the Python’s alternative interface.</p>
+<p><img src="/images/Nlopt-logo.png" alt/></p>
+<h3 id="cooking-the-ios-framework">Cooking the ios framework</h3>
+<p>However, you cannot just include it in the project as we did with Boost.
+You have to wrap the library in a framework. Let’s see how to make one.</p>
+<ol>
+<li>
+<p>Check out the git repository: <code>git clone git@github.com:stevengj/nlopt.git</code></p>
+</li>
+<li>
+<p>You need to build it for iOS. Use the toolchain for cmake <a href="https://github.com/leetal/ios-cmake">https://github.com/leetal/ios-cmake</a>.<br/>
+Copy the <strong>ios.toolchain.cmake</strong> file to the root directory of the <strong>nlopt</strong> repo</p>
+</li>
+<li>
+<p>Build a combined library - it will run on both an actual device and a simulator:</p>
+</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>cd nlopt</span></span>
+<span class="line"><span>mkdir build-combined</span></span>
+<span class="line"><span>cd build-combined</span></span>
+<span class="line"><span>cmake -DCMAKE_INSTALL_PREFIX=install .. -G Xcode -T buildsystem=1 -DCMAKE_TOOLCHAIN_FILE=../ios.toolchain.cmake -DPLATFORM=OS64COMBINED   </span></span></code></pre>
+<ol start="4">
+<li>After cmake with the toolchain, open the generated project in XCode, fix signing profiles, and select the development team in <strong>Build Settings</strong> for all targets.</li>
+<li>Set the <strong>Product Bundle Identifier</strong> in the Build Settings where required. You will get these errors if you try to compile the project.</li>
+<li>Build XCode project</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>cmake --build . --config Release</span></span>
+<span class="line"><span>cmake --install . --config Release</span></span></code></pre>
+<ol start="7">
+<li>Create the framework. There is the bash script for that. Make sure to correct the paths.</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>export OUT_DIR=&quot;/Users/ivkin/git/nlopt/ios-framework&quot;</span></span>
+<span class="line"><span>export LIB_NAME=&quot;nlopt&quot;</span></span>
+<span class="line"><span>export SOURCE_INFO_PLIST=&quot;Info.plist&quot;</span></span>
+<span class="line"><span>export DYLIBS=&quot;build-simulator/Release-iphonesimulator/libnlopt.0.11.1.dylib&quot;</span></span>
+<span class="line"><span>export DY_FILE=&quot;libnlopt.0.dylib&quot;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># set OUT_DIR and LIB_NAME</span></span>
+<span class="line"><span>FW_PATH=&quot;$OUT_DIR/$LIB_NAME.framework&quot;</span></span>
+<span class="line"><span>INFO_PLIST=&quot;$FW_PATH/Info.plist&quot;</span></span>
+<span class="line"><span>OUT_DYLIB=&quot;$FW_PATH/$LIB_NAME&quot;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># set the DYLIBS and SOURCE_INFO_PLIST for the library</span></span>
+<span class="line"><span>mkdir -p &quot;$FW_PATH&quot;</span></span>
+<span class="line"><span>cp &quot;$SOURCE_INFO_PLIST&quot; &quot;$INFO_PLIST&quot;</span></span>
+<span class="line"><span>lipo $DYLIBS -output &quot;$OUT_DYLIB&quot; -create</span></span>
+<span class="line"><span>install_name_tool -id @rpath/$LIB_NAME.framework/$LIB_NAME &quot;$OUT_DYLIB&quot;</span></span></code></pre>
+<ol start="8">
+<li>Sign the library. You can find a signature in the output of your recent builds. Modify the command to use your path and the signature:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>codesign --verbose=2 --force --sign EEAXXXXXXXXXXXXXXXXXX4CF1 ~/git/nlopt/ios-framework/nlopt.framework/nlopt</span></span></code></pre>
+<ol start="9">
+<li>Include the framework in <strong>Target-&gt;Build Phases-&gt;Link Binary With Libraries</strong></li>
+<li>Embed the framework in <strong>Target-&gt;Build Phases-&gt;Embed Frameworks</strong></li>
+<li>For some reason the build will try to use incorrect library name.<br/>
+We have to fix it by modifying the library name to lookup during the build. Let’s add a build step in <strong>Target-&gt;Build Phases-&gt;Run Script</strong></li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>install_name_tool -change @rpath/libnlopt.0.dylib @rpath/nlopt.framework/nlopt &quot;$TARGET_BUILD_DIR/$TARGET_NAME.app/$PRODUCT_NAME&quot;</span></span></code></pre>
+<ol start="12">
+<li>And the last step is to fix MinimumOSVersion in the <code>Info.plist</code> of the framework.
+<code>MinimumOSVersion = 10.0</code></li>
+</ol>
+<p>Now you can build your project with nlopt framework.</p>
+<h3 id="using-nlopt-framework-in-object-c">Using NLopt framework in Object-C</h3>
+<p>Let’s use it in the Obejctive-C code. Here is how I use it to predict the golf ball trajectory by a few known locations:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>#include &lt;nlopt.hpp&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>vector&lt;double&gt; fitCurveParams(vector&lt;cv::Point2d&gt; points, vector&lt;double&gt; times) {</span></span>
+<span class="line"><span>    nlopt::opt opt(nlopt::LN_NELDERMEAD, 8);</span></span>
+<span class="line"><span>    std::vector&lt;double&gt; lb(8);</span></span>
+<span class="line"><span>    lb[0] = -1; // x</span></span>
+<span class="line"><span>    lb[2] = 0; // y</span></span>
+<span class="line"><span>    lb[4] = 2; // z</span></span>
+<span class="line"><span>    lb[1] = -50; // vx</span></span>
+<span class="line"><span>    lb[3] = 1; // vy</span></span>
+<span class="line"><span>    lb[5] = 20; // vz</span></span>
+<span class="line"><span>    lb[6] = -200; // w_i</span></span>
+<span class="line"><span>    lb[7] = -200; // w_k</span></span>
+<span class="line"><span>    opt.set_lower_bounds(lb);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    std::vector&lt;double&gt; ub(8);</span></span>
+<span class="line"><span>    ub[0] = 1;</span></span>
+<span class="line"><span>    ub[2] = 1;</span></span>
+<span class="line"><span>    ub[4] = 10;</span></span>
+<span class="line"><span>    ub[1] = 50;</span></span>
+<span class="line"><span>    ub[3] = 100;</span></span>
+<span class="line"><span>    ub[5] = 300;</span></span>
+<span class="line"><span>    ub[6] = 200;</span></span>
+<span class="line"><span>    ub[7] = 200;</span></span>
+<span class="line"><span>    opt.set_upper_bounds(ub);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    vector&lt;vector&lt;double&gt;&gt; track;</span></span>
+<span class="line"><span>    for (int i = 0; i &lt; points.size(); i++) {</span></span>
+<span class="line"><span>        vector&lt;double&gt; point { points[i].x, points[i].y };</span></span>
+<span class="line"><span>        track.push_back(point);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    DistanceData data { track, times };</span></span>
+<span class="line"><span>    opt.set_min_objective(distanceFunc, &amp;data);</span></span>
+<span class="line"><span>    opt.set_xtol_rel(1e-4);</span></span>
+<span class="line"><span>    vector&lt;double&gt; x {0, 0, 0, 30, 5, 50, 100, 100};</span></span>
+<span class="line"><span>    double minf;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    try {</span></span>
+<span class="line"><span>        nlopt::result result = opt.optimize(x, minf);</span></span>
+<span class="line"><span>    } catch(std::exception &amp;e) {</span></span>
+<span class="line"><span>        cout &lt;&lt; &quot;nlopt failed: &quot; &lt;&lt; e.what() &lt;&lt; endl;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    return x;</span></span>
+<span class="line"><span>}</span></span></code></pre> </div> <footer class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800" data-astro-cid-7jjqptxk> <div class="flex justify-between items-center" data-astro-cid-7jjqptxk> <a href="/blog" class="text-blue-600 dark:text-blue-400 hover:underline" data-astro-cid-7jjqptxk>
+← Back to blog
+</a> <div class="flex gap-4" data-astro-cid-7jjqptxk> <a href="https://twitter.com/intent/tweet?text=How%20to%20build%20and%20use%20a%20DyLib%20in%20iOS%20app&url=https%3A%2F%2Fivkin.dev%2Fblog%2Fbuild-dylib-library-for-ios&via=alexivkin" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400" aria-label="Share on Twitter" data-astro-cid-7jjqptxk> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" data-astro-cid-7jjqptxk> <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" data-astro-cid-7jjqptxk></path> </svg> </a> </div> </div> </footer> </article> </main> <footer class="mt-auto border-t border-gray-200 dark:border-gray-800 py-8"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex flex-col sm:flex-row justify-between items-center gap-4"> <div class="text-sm text-gray-600 dark:text-gray-400">
+© 2025 Alexander Ivkin. All rights reserved.
+</div> <div class="flex items-center gap-6"> <a href="https://twitter.com/alexivkin" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors" aria-label="Twitter"> <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"> <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path> </svg> </a> <a href="https://github.com/evekeen" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors" aria-label="GitHub"> <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"> <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path> </svg> </a> <a href="https://www.linkedin.com/in/evekeen" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors" aria-label="LinkedIn"> <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"> <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path> </svg> </a> </div> </div> </div> </footer> </div>  </body></html> 

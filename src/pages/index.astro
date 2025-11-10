@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const featuredPosts = allPosts.slice(0, 3);
+---
+
+<BaseLayout>
+  <div class="flex flex-col min-h-screen">
+    <Header />
+
+    <main class="flex-1">
+      <!-- Hero Section -->
+      <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div class="flex flex-col sm:flex-row items-center gap-8">
+          <img
+            src="/images/ava-pro-300.jpg"
+            alt="Alexander Ivkin"
+            class="w-32 h-32 rounded-full object-cover shadow-lg"
+          />
+
+          <div class="flex-1 text-center sm:text-left">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Alexander Ivkin
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">
+              Indie hacker, author of <a href="https://acetrace.app" target="_blank" rel="noopener" class="text-blue-600 dark:text-blue-400 hover:underline">Ace Trace</a> app
+            </p>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+              Building products, experimenting with AI, and sharing my journey as an entrepreneur.
+              Passionate about creating beautiful, user-friendly applications that solve real problems.
+            </p>
+
+            <div class="flex gap-4 justify-center sm:justify-start">
+              <a
+                href="/blog"
+                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors shadow-md hover:shadow-lg"
+              >
+                Read Blog
+              </a>
+              <a
+                href="https://acetrace.app"
+                target="_blank"
+                rel="noopener"
+                class="px-6 py-3 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg font-semibold transition-colors shadow-md hover:shadow-lg border border-gray-300 dark:border-gray-700"
+              >
+                View Project
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Posts -->
+      <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-gray-200 dark:border-gray-800">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-3xl font-bold">Latest Posts</h2>
+          <a href="/blog" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">
+            View all →
+          </a>
+        </div>
+
+        <div class="grid gap-6">
+          {featuredPosts.map((post) => (
+            <article class="group p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-400 transition-all hover:shadow-lg">
+              <a href={`/blog/${post.slug}`} class="block">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {post.data.title}
+                  </h3>
+                </div>
+                <time class="text-sm text-gray-600 dark:text-gray-400">
+                  {post.data.date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+                {post.data.description && (
+                  <p class="mt-3 text-gray-600 dark:text-gray-400 line-clamp-2">
+                    {post.data.description}
+                  </p>
+                )}
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- About / Projects Section -->
+      <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-gray-200 dark:border-gray-800">
+        <h2 class="text-3xl font-bold mb-6">Projects</h2>
+
+        <div class="space-y-6">
+          <div class="p-6 rounded-lg bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-800 border border-gray-200 dark:border-gray-700">
+            <div class="flex items-start gap-4">
+              <div class="flex-1">
+                <h3 class="text-2xl font-bold mb-2">
+                  <a href="https://acetrace.app" target="_blank" rel="noopener" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    Ace Trace
+                  </a>
+                </h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                  A modern app for tracking and analyzing your progress. Built with love and attention to detail.
+                </p>
+                <a
+                  href="https://acetrace.app"
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline font-semibold"
+                >
+                  Visit website →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>

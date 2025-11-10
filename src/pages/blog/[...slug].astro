@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+// Calculate reading time (rough estimate)
+const wordsPerMinute = 200;
+const text = post.body;
+const wordCount = text.split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / wordsPerMinute);
+---
+
+<BaseLayout title={`${post.data.title} - Alexander Ivkin`} description={post.data.description || post.data.title}>
+  <div class="flex flex-col min-h-screen">
+    <Header />
+
+    <main class="flex-1">
+      <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <header class="mb-12">
+          <a
+            href="/blog"
+            class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline mb-8"
+          >
+            ← Back to blog
+          </a>
+
+          <h1 class="text-4xl sm:text-5xl font-bold mb-4">
+            {post.data.title}
+          </h1>
+
+          <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-400">
+            <time>{formattedDate}</time>
+            <span>•</span>
+            <span>{readingTime} min read</span>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <>
+                <span>•</span>
+                <div class="flex gap-2">
+                  {post.data.tags.map(tag => (
+                    <a
+                      href={`/blog/tag/${tag}`}
+                      class="text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      #{tag}
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </header>
+
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          <Content />
+        </div>
+
+        <footer class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div class="flex justify-between items-center">
+            <a
+              href="/blog"
+              class="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              ← Back to blog
+            </a>
+
+            <div class="flex gap-4">
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(`https://ivkin.dev/blog/${post.slug}`)}&via=alexivkin`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                aria-label="Share on Twitter"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </footer>
+      </article>
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  .prose {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  .prose :global(h1),
+  .prose :global(h2),
+  .prose :global(h3),
+  .prose :global(h4) {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+
+  .prose :global(a) {
+    @apply text-blue-600 dark:text-blue-400 no-underline hover:underline;
+  }
+
+  .prose :global(code) {
+    @apply bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm;
+  }
+
+  .prose :global(pre) {
+    @apply bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto;
+  }
+
+  .prose :global(pre code) {
+    @apply bg-transparent p-0 text-gray-100;
+  }
+
+  .prose :global(blockquote) {
+    @apply border-l-4 border-blue-600 dark:border-blue-400 pl-4 italic;
+  }
+</style>
