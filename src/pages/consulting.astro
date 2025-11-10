@@ -70,6 +70,7 @@ const skills = {
     "iOS and Android native development"
   ],
   "Backend & Cloud": [
+    "Python",
     "Java, Kotlin",
     "Node.js, TypeScript",
     "AWS (Lambda, CDK, API Gateway)",
@@ -88,7 +89,7 @@ const skills = {
 ---
 
 <BaseLayout
-  title="Hire Me - Alexander Ivkin"
+  title="Book Consulting - Alexander Ivkin"
   description="CTO and software engineer with 15+ years of experience building AI-powered products. Available for consulting on AI/ML, mobile apps, and product development."
 >
   <div class="flex flex-col min-h-screen bg-gray-50 dark:bg-[#0a0a0a]">
@@ -207,22 +208,33 @@ const skills = {
         </div>
       </section>
 
-      <!-- Call to Action -->
+      <!-- Booking Section -->
       <section class="max-w-6xl mx-auto px-6 py-16 mb-16">
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-12 text-center shadow-2xl border-2 border-gray-800 dark:border-gray-700">
-          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to Start?</h2>
-          <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Whether you need help with AI integration, mobile app development, or product strategy, I'm here to help turn your vision into reality.
-          </p>
-          <a
-            href="mailto:alex@ivkin.dev"
-            class="group inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-xl hover:scale-105 transition-transform shadow-lg text-lg"
-          >
-            Email: alex@ivkin.dev
-            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-            </svg>
-          </a>
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 sm:p-12 shadow-2xl border-2 border-gray-200 dark:border-gray-800">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">Book a Consultation</h2>
+            <p class="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
+              Schedule a 1-hour consultation to discuss your project. Whether you need help with AI integration, mobile app development, or product strategy, I'm here to help.
+            </p>
+          </div>
+
+          <!-- Calendly inline widget begin -->
+          <div class="calendly-inline-widget" data-url="https://calendly.com/ivkindev/1-hour" style="min-width:320px;height:700px;"></div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          <!-- Calendly inline widget end -->
+
+          <div class="text-center mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <p class="text-gray-600 dark:text-gray-400 mb-4">Or reach out directly:</p>
+            <a
+              href="mailto:alex@ivkin.dev"
+              class="group inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline text-lg font-semibold"
+            >
+              alex@ivkin.dev
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
     </main>
