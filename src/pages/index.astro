@@ -21,7 +21,7 @@ const featuredPosts = allPosts.slice(0, 6);
         <!-- Profile Image with layered effect -->
         <div class="mb-16 flex items-start gap-8 flex-wrap">
           <div class="relative group">
-            <div class="absolute -inset-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-75 blur-xl group-hover:opacity-100 transition"></div>
+            <div class="absolute -inset-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-75 blur-xl group-hover:opacity-100 transition animate-gradient-morph"></div>
             <img
               src="/images/ava-pro-300.jpg"
               alt="Alexander Ivkin"
@@ -37,8 +37,7 @@ const featuredPosts = allPosts.slice(0, 6);
               Alexander Ivkin
             </h1>
             <p class="text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-6 max-w-2xl">
-              CTO at Enabled Health Inc, building healthcare tech that keeps patients mobile.
-              Built and sold Ace Trace as an indie hacker in 2025. Founding engineer at Winrate.com.
+              <span id="typing-text" data-text="CTO at Enabled Health Inc, building healthcare tech that keeps patients mobile. Built and sold Ace Trace as an indie hacker in 2025. Founding engineer at Winrate.com."></span><span id="typing-cursor" class="animate-pulse">|</span>
             </p>
 
             <div class="flex gap-4 flex-wrap">
@@ -89,7 +88,7 @@ const featuredPosts = allPosts.slice(0, 6);
             const colorClass = colors[index % colors.length];
 
             return (
-              <article class="group">
+              <article class="group fade-in-up" style={`animation-delay: ${index * 100}ms`}>
                 <a href={`/blog/${post.slug}`} class="block">
                   <div class={`relative bg-gradient-to-br ${colorClass} border-2 rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl h-full`}>
                     {/* Date stamp */}
@@ -213,3 +212,96 @@ const featuredPosts = allPosts.slice(0, 6);
     <Footer />
   </div>
 </BaseLayout>
+
+<style>
+  /* Animated gradient morphing */
+  @keyframes gradient-morph {
+    0%, 100% {
+      background: linear-gradient(135deg, #3b82f6 0%, #9333ea 100%);
+    }
+    25% {
+      background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+    }
+    50% {
+      background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    }
+    75% {
+      background: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+    }
+  }
+
+  .animate-gradient-morph {
+    animation: gradient-morph 8s ease-in-out infinite;
+    background-size: 400% 400%;
+  }
+
+  /* Scroll-triggered fade-in-up animation */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Typing cursor blink */
+  #typing-cursor {
+    display: inline-block;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+
+<script>
+  // Typing animation
+  const typingText = document.getElementById('typing-text');
+  const cursor = document.getElementById('typing-cursor');
+
+  if (typingText && cursor) {
+    const fullText = typingText.getAttribute('data-text') || '';
+    let currentIndex = 0;
+
+    function typeCharacter() {
+      if (currentIndex < fullText.length && typingText) {
+        typingText.textContent = fullText.substring(0, currentIndex + 1);
+        currentIndex++;
+        setTimeout(typeCharacter, 30); // Typing speed: 30ms per character
+      } else if (cursor) {
+        // Hide cursor after typing is complete
+        setTimeout(() => {
+          cursor.style.display = 'none';
+        }, 500);
+      }
+    }
+
+    // Start typing after a brief delay
+    setTimeout(typeCharacter, 500);
+  }
+
+  // Scroll-triggered animations using Intersection Observer
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all elements with fade-in-up class
+  document.querySelectorAll('.fade-in-up').forEach(element => {
+    observer.observe(element);
+  });
+</script>
