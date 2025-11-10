@@ -261,57 +261,67 @@ const featuredPosts = allPosts.slice(0, 6);
   /* Glowing text animation */
   .glow-char {
     display: inline-block;
-    animation: textGlow 1.5s ease-out;
+    animation: textGlow 2s ease-in-out;
   }
 
   @keyframes textGlow {
-    0% {
+    0%, 20% {
       text-shadow:
-        0 0 10px rgba(59, 130, 246, 0.8),
-        0 0 20px rgba(59, 130, 246, 0.6),
-        0 0 30px rgba(59, 130, 246, 0.4),
-        0 0 40px rgba(147, 51, 234, 0.3);
-      color: rgb(147, 197, 253);
+        0 0 20px rgba(59, 130, 246, 1),
+        0 0 40px rgba(59, 130, 246, 0.8),
+        0 0 60px rgba(59, 130, 246, 0.6),
+        0 0 80px rgba(147, 51, 234, 0.5),
+        0 0 100px rgba(147, 51, 234, 0.3);
+      color: rgb(96, 165, 250);
+      transform: scale(1.05);
     }
     50% {
       text-shadow:
-        0 0 15px rgba(59, 130, 246, 0.9),
-        0 0 25px rgba(59, 130, 246, 0.7),
-        0 0 35px rgba(59, 130, 246, 0.5),
-        0 0 50px rgba(147, 51, 234, 0.4);
-      color: rgb(96, 165, 250);
+        0 0 25px rgba(59, 130, 246, 1),
+        0 0 50px rgba(59, 130, 246, 0.9),
+        0 0 75px rgba(59, 130, 246, 0.7),
+        0 0 100px rgba(147, 51, 234, 0.6),
+        0 0 125px rgba(147, 51, 234, 0.4);
+      color: rgb(59, 130, 246);
+      transform: scale(1.1);
     }
     100% {
       text-shadow: none;
       color: inherit;
+      transform: scale(1);
     }
   }
 
   /* Dark mode adjustments for glow */
   :global(.dark) .glow-char {
-    animation: textGlowDark 1.5s ease-out;
+    animation: textGlowDark 2s ease-in-out;
   }
 
   @keyframes textGlowDark {
-    0% {
+    0%, 20% {
       text-shadow:
-        0 0 10px rgba(96, 165, 250, 0.9),
-        0 0 20px rgba(96, 165, 250, 0.7),
-        0 0 30px rgba(96, 165, 250, 0.5),
-        0 0 40px rgba(168, 85, 247, 0.4);
-      color: rgb(191, 219, 254);
+        0 0 20px rgba(96, 165, 250, 1),
+        0 0 40px rgba(96, 165, 250, 0.9),
+        0 0 60px rgba(96, 165, 250, 0.7),
+        0 0 80px rgba(168, 85, 247, 0.6),
+        0 0 100px rgba(168, 85, 247, 0.4);
+      color: rgb(147, 197, 253);
+      transform: scale(1.05);
     }
     50% {
       text-shadow:
-        0 0 15px rgba(96, 165, 250, 1),
-        0 0 25px rgba(96, 165, 250, 0.8),
-        0 0 35px rgba(96, 165, 250, 0.6),
-        0 0 50px rgba(168, 85, 247, 0.5);
-      color: rgb(147, 197, 253);
+        0 0 25px rgba(96, 165, 250, 1),
+        0 0 50px rgba(96, 165, 250, 1),
+        0 0 75px rgba(96, 165, 250, 0.8),
+        0 0 100px rgba(168, 85, 247, 0.7),
+        0 0 125px rgba(168, 85, 247, 0.5);
+      color: rgb(96, 165, 250);
+      transform: scale(1.1);
     }
     100% {
       text-shadow: none;
       color: inherit;
+      transform: scale(1);
     }
   }
 </style>
@@ -344,7 +354,7 @@ const featuredPosts = allPosts.slice(0, 6);
         }
 
         currentIndex++;
-        setTimeout(typeCharacter, 30); // Typing speed: 30ms per character
+        setTimeout(typeCharacter, 50); // Typing speed: 50ms per character
       } else if (cursor) {
         // Hide cursor after typing is complete
         setTimeout(() => {
