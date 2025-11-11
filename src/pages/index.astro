@@ -363,12 +363,12 @@ const featuredPosts = allPosts.slice(0, 6);
           const span = document.createElement('span');
           // Use non-breaking space for actual spaces to prevent collapse
           span.textContent = fullText[i] === ' ' ? '\u00A0' : fullText[i];
-          span.style.display = 'inline-block';
 
           // Apply glow animation only to the newly typed character
           if (i === currentIndex) {
             span.className = 'glow-char';
             // Force inline styles for maximum visibility
+            span.style.display = 'inline-block';
             span.style.animation = 'textGlow 2s ease-in-out';
             span.style.textShadow = '0 0 20px rgba(59, 130, 246, 1), 0 0 40px rgba(59, 130, 246, 1), 0 0 60px rgba(59, 130, 246, 1), 0 0 80px rgba(147, 51, 234, 0.8)';
             span.style.color = '#3b82f6';
@@ -379,6 +379,7 @@ const featuredPosts = allPosts.slice(0, 6);
 
             // Fade the glow after 2 seconds
             setTimeout(() => {
+              span.style.display = 'inline';
               span.style.textShadow = 'none';
               span.style.color = 'inherit';
               span.style.filter = 'brightness(1)';
