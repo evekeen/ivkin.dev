@@ -355,39 +355,32 @@ const featuredPosts = allPosts.slice(0, 6);
 
     function typeCharacter() {
       if (currentIndex < fullText.length && typingText) {
-        // Clear previous content
-        typingText.innerHTML = '';
+        const char = fullText[currentIndex];
 
-        // Add each character with glow effect
-        for (let i = 0; i <= currentIndex; i++) {
-          const span = document.createElement('span');
-          // Use non-breaking space for actual spaces to prevent collapse
-          span.textContent = fullText[i] === ' ' ? '\u00A0' : fullText[i];
+        // Create span for the new character with glow
+        const span = document.createElement('span');
+        span.textContent = char;
+        span.className = 'glow-char';
 
-          // Apply glow animation only to the newly typed character
-          if (i === currentIndex) {
-            span.className = 'glow-char';
-            // Force inline styles for maximum visibility (no scale/inline-block to preserve wrapping)
-            span.style.animation = 'textGlow 2s ease-in-out';
-            span.style.textShadow = '0 0 20px rgba(59, 130, 246, 1), 0 0 40px rgba(59, 130, 246, 1), 0 0 60px rgba(59, 130, 246, 1), 0 0 80px rgba(147, 51, 234, 0.8), 0 0 100px rgba(147, 51, 234, 0.6)';
-            span.style.color = '#3b82f6';
-            span.style.filter = 'brightness(2)';
-            span.style.fontWeight = 'bold';
+        // Apply glow styles
+        span.style.textShadow = '0 0 20px rgba(59, 130, 246, 1), 0 0 40px rgba(59, 130, 246, 1), 0 0 60px rgba(59, 130, 246, 1), 0 0 80px rgba(147, 51, 234, 0.8), 0 0 100px rgba(147, 51, 234, 0.6)';
+        span.style.color = '#3b82f6';
+        span.style.filter = 'brightness(2)';
+        span.style.fontWeight = 'bold';
 
-            console.log('Applied glow to character:', fullText[i], 'with inline styles');
+        // Append the glowing character
+        typingText.appendChild(span);
 
-            // Fade the glow after 2 seconds
-            setTimeout(() => {
-              span.style.textShadow = 'none';
-              span.style.color = 'inherit';
-              span.style.filter = 'brightness(1)';
-              span.style.fontWeight = 'inherit';
-              span.style.transition = 'all 1s ease-out';
-            }, 2000);
-          }
+        console.log('Applied glow to character:', char, 'at index:', currentIndex);
 
-          typingText.appendChild(span);
-        }
+        // Fade the glow after 2 seconds
+        setTimeout(() => {
+          span.style.textShadow = 'none';
+          span.style.color = 'inherit';
+          span.style.filter = 'brightness(1)';
+          span.style.fontWeight = 'inherit';
+          span.style.transition = 'all 1s ease-out';
+        }, 2000);
 
         currentIndex++;
         setTimeout(typeCharacter, 50); // Typing speed: 50ms per character
