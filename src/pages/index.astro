@@ -327,6 +327,8 @@ const featuredPosts = allPosts.slice(0, 6);
     console.log('Starting typing animation for:', fullText);
 
     function typeCharacter() {
+      if (!typingText) return;
+
       if (currentIndex < fullText.length) {
         const char = fullText[currentIndex];
         typedText += char;
