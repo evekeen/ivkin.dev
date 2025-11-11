@@ -361,7 +361,8 @@ const featuredPosts = allPosts.slice(0, 6);
         // Add each character with glow effect
         for (let i = 0; i <= currentIndex; i++) {
           const span = document.createElement('span');
-          span.textContent = fullText[i];
+          // Use non-breaking space for actual spaces to prevent collapse
+          span.textContent = fullText[i] === ' ' ? '\u00A0' : fullText[i];
           span.style.display = 'inline-block';
 
           // Apply glow animation only to the newly typed character
