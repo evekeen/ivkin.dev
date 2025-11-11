@@ -258,84 +258,56 @@ const featuredPosts = allPosts.slice(0, 6);
     50% { opacity: 0; }
   }
 
-  /* Glowing text animation - EXTREME glow effect */
+  /* Glowing text animation - optimized for performance and word wrapping */
   :global(.glow-char) {
-    display: inline-block !important;
-    animation: textGlow 2s ease-in-out !important;
+    /* Keep as inline to allow natural word wrapping */
+    animation: textGlow 1.5s ease-out !important;
   }
 
   @keyframes textGlow {
-    0%, 30% {
+    0%, 20% {
       text-shadow:
-        0 0 5px rgba(59, 130, 246, 1),
         0 0 10px rgba(59, 130, 246, 1),
-        0 0 20px rgba(59, 130, 246, 1),
-        0 0 40px rgba(59, 130, 246, 1),
-        0 0 80px rgba(59, 130, 246, 0.8),
-        0 0 120px rgba(147, 51, 234, 0.6),
-        0 0 160px rgba(147, 51, 234, 0.4) !important;
+        0 0 20px rgba(59, 130, 246, 0.8),
+        0 0 40px rgba(147, 51, 234, 0.6);
       color: #3b82f6 !important;
-      filter: brightness(1.5) !important;
-      transform: scale(1.15) !important;
     }
-    60% {
+    50% {
       text-shadow:
-        0 0 8px rgba(59, 130, 246, 1),
         0 0 15px rgba(59, 130, 246, 1),
-        0 0 30px rgba(59, 130, 246, 1),
-        0 0 60px rgba(59, 130, 246, 1),
-        0 0 100px rgba(59, 130, 246, 0.9),
-        0 0 140px rgba(147, 51, 234, 0.7),
-        0 0 180px rgba(147, 51, 234, 0.5) !important;
+        0 0 30px rgba(59, 130, 246, 0.9),
+        0 0 50px rgba(147, 51, 234, 0.7);
       color: #60a5fa !important;
-      filter: brightness(1.8) !important;
-      transform: scale(1.2) !important;
     }
     100% {
       text-shadow: none !important;
       color: inherit !important;
-      filter: brightness(1) !important;
-      transform: scale(1) !important;
     }
   }
 
   /* Dark mode adjustments for glow */
   :global(.dark) :global(.glow-char) {
-    animation: textGlowDark 2s ease-in-out !important;
+    animation: textGlowDark 1.5s ease-out !important;
   }
 
   @keyframes textGlowDark {
-    0%, 30% {
+    0%, 20% {
       text-shadow:
-        0 0 5px rgba(147, 197, 253, 1),
-        0 0 10px rgba(147, 197, 253, 1),
-        0 0 20px rgba(96, 165, 250, 1),
-        0 0 40px rgba(96, 165, 250, 1),
-        0 0 80px rgba(96, 165, 250, 0.9),
-        0 0 120px rgba(168, 85, 247, 0.7),
-        0 0 160px rgba(168, 85, 247, 0.5) !important;
+        0 0 10px rgba(96, 165, 250, 1),
+        0 0 20px rgba(96, 165, 250, 0.9),
+        0 0 40px rgba(168, 85, 247, 0.7);
       color: #93c5fd !important;
-      filter: brightness(1.8) !important;
-      transform: scale(1.15) !important;
     }
-    60% {
+    50% {
       text-shadow:
-        0 0 8px rgba(147, 197, 253, 1),
-        0 0 15px rgba(147, 197, 253, 1),
+        0 0 15px rgba(96, 165, 250, 1),
         0 0 30px rgba(96, 165, 250, 1),
-        0 0 60px rgba(96, 165, 250, 1),
-        0 0 100px rgba(96, 165, 250, 1),
-        0 0 140px rgba(168, 85, 247, 0.8),
-        0 0 180px rgba(168, 85, 247, 0.6) !important;
+        0 0 50px rgba(168, 85, 247, 0.8);
       color: #60a5fa !important;
-      filter: brightness(2) !important;
-      transform: scale(1.2) !important;
     }
     100% {
       text-shadow: none !important;
       color: inherit !important;
-      filter: brightness(1) !important;
-      transform: scale(1) !important;
     }
   }
 </style>
@@ -363,25 +335,15 @@ const featuredPosts = allPosts.slice(0, 6);
         span.textContent = char === ' ' ? '\u00A0' : char;
         span.className = 'glow-char';
 
-        // Apply glow styles
-        span.style.textShadow = '0 0 20px rgba(59, 130, 246, 1), 0 0 40px rgba(59, 130, 246, 1), 0 0 60px rgba(59, 130, 246, 1), 0 0 80px rgba(147, 51, 234, 0.8), 0 0 100px rgba(147, 51, 234, 0.6)';
-        span.style.color = '#3b82f6';
-        span.style.filter = 'brightness(2)';
-        span.style.fontWeight = 'bold';
-
         // Append the glowing character
         typingText.appendChild(span);
 
         console.log('Applied glow to character:', char, 'at index:', currentIndex);
 
-        // Fade the glow after 2 seconds
+        // Remove glow class after animation completes (1.5s)
         setTimeout(() => {
-          span.style.textShadow = 'none';
-          span.style.color = 'inherit';
-          span.style.filter = 'brightness(1)';
-          span.style.fontWeight = 'inherit';
-          span.style.transition = 'all 1s ease-out';
-        }, 2000);
+          span.classList.remove('glow-char');
+        }, 1500);
 
         currentIndex++;
         setTimeout(typeCharacter, 30); // Typing speed: 30ms per character
