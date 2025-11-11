@@ -259,7 +259,7 @@ const featuredPosts = allPosts.slice(0, 6);
   }
 
   /* Glowing text animation - EXTREME glow effect */
-  .glow-char {
+  :global(.glow-char) {
     display: inline-block !important;
     animation: textGlow 2s ease-in-out !important;
   }
@@ -300,7 +300,7 @@ const featuredPosts = allPosts.slice(0, 6);
   }
 
   /* Dark mode adjustments for glow */
-  :global(.dark) .glow-char {
+  :global(.dark) :global(.glow-char) {
     animation: textGlowDark 2s ease-in-out !important;
   }
 
