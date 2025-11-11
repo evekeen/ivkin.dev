@@ -359,7 +359,8 @@ const featuredPosts = allPosts.slice(0, 6);
 
         // Create span for the new character with glow
         const span = document.createElement('span');
-        span.textContent = char;
+        // Preserve spaces by using non-breaking space
+        span.textContent = char === ' ' ? '\u00A0' : char;
         span.className = 'glow-char';
 
         // Apply glow styles
@@ -383,7 +384,7 @@ const featuredPosts = allPosts.slice(0, 6);
         }, 2000);
 
         currentIndex++;
-        setTimeout(typeCharacter, 50); // Typing speed: 50ms per character
+        setTimeout(typeCharacter, 30); // Typing speed: 30ms per character
       } else if (cursor) {
         // Hide cursor after typing is complete
         console.log('Typing complete');
