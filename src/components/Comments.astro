@@ -1,24 +1,6 @@
 ---
-// Giscus comments component - replaces Disqus from Hugo setup
+// Giscus comments component - GitHub Discussions-based commenting system
 // https://giscus.app/
-//
-// MIGRATION NOTE: Original Hugo site used Disqus (disqusShortname="https-ivkin-dev")
-// Astro migration switched to Giscus for better GitHub integration
-//
-// SETUP REQUIRED (one-time):
-// 1. Enable GitHub Discussions: https://github.com/evekeen/ivkin.dev/settings
-//    - Go to Settings > General > Features > Check "Discussions"
-// 2. Install Giscus GitHub App: https://github.com/apps/giscus
-//    - Click "Install" and grant access to evekeen/ivkin.dev repository
-// 3. Verify configuration at: https://giscus.app/
-//    - Repository: evekeen/ivkin.dev
-//    - Category: General (or create a new category in Discussions)
-//
-// Current Configuration:
-// - Repository ID: R_kgDOMwdTVw
-// - Category: General
-// - Category ID: DIC_kwDOMwdTVw
-// - Mapping: pathname (each page URL gets its own discussion)
 ---
 
 <div class="giscus-wrapper mt-24 pt-16 border-t border-gray-200 dark:border-gray-800">
@@ -40,7 +22,8 @@
       data-lang="en"
       data-loading="lazy"
       crossorigin="anonymous"
-      async>
+      async
+      is:inline>
     </script>
   </div>
 
