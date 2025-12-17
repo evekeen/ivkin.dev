@@ -24,7 +24,7 @@ const currentPath = Astro.url.pathname;
         </a>
         <a
           href="/consulting"
-          class={`hover:text-blue-600 dark:hover:text-blue-400 transition-colors ${currentPath === '/consulting' ? 'text-blue-600 dark:text-blue-400 font-semibold' : ''}`}
+          class={`hover:text-blue-600 dark:hover:text-blue-400 transition-colors ${currentPath.startsWith('/consulting') ? 'text-blue-600 dark:text-blue-400 font-semibold' : ''}`}
         >
           Connect
         </a>
