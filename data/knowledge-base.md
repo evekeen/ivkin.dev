@@ -8,6 +8,7 @@
 - **LinkedIn**: [evekeen](https://linkedin.com/in/evekeen)
 - **Website**: [ivkin.dev](https://ivkin.dev)
 - **Twitter/X**: [@alexivkin](https://twitter.com/alexivkin)
+- **Sundai Club**: [@evekeen](https://www.sundai.club/hacker/5a24b37f-5a65-4c57-ab06-8a8d6a8fb4ea)
 - **Devpost**: [evekeen](https://devpost.com/evekeen)
 - **Location**: Barcelona, Spain
 - **Experience**: 15+ years in software engineering (self-reported in March 2022 blog post)
