@@ -1,0 +1,423 @@
+# Alexander Ivkin
+
+> Software engineer and independent consultant. 15+ years building products end to end — from JVM testing at Sun Microsystems to production AI agents today. Founded Ace Trace (6K paying subscribers, acquired 2025). Currently helping companies ship agentic AI applications.
+
+## Identity
+
+- Full name: Alexander Ivkin
+- Company: Ivkin LLC
+- GitHub: https://github.com/evekeen
+- LinkedIn: https://linkedin.com/in/evekeen
+- Website: https://ivkin.dev
+- Twitter/X: https://twitter.com/alexivkin
+- Sundai Club: https://www.sundai.club/hacker/5a24b37f-5a65-4c57-ab06-8a8d6a8fb4ea
+- Location: Barcelona, Spain
+
+## What I Do Now
+
+Independent consultant helping companies ship production agentic AI applications and re-imagine their product vision. Full-stack: LLM agent architecture, evaluation systems, React frontends, cloud infrastructure — end to end.
+
+## Education
+
+Moscow Institute of Physics and Technology (MIPT) — PhD track (not completed), "Matware and Software of computers and computer networks", 2013–2015
+- Concurrent role: Lead Software Developer (part-time, May 2013 – Jan 2016)
+- Built a computer vision system for object tracking in video, and a simulator and test engine for the system
+- Research led to publication in Herald of Bauman Moscow State Technical University
+
+Saint Petersburg State Electrotechnical University "LETI" (SPbGETU) — Master's degree, Electronics and Microelectronics, 2007–2009
+
+Saint Petersburg State Electrotechnical University "LETI" (SPbGETU) — Bachelor's degree, Electronics and Microelectronics, 2003–2007
+
+## Publications
+
+"The Image Stabilization Algorithms Testing System"
+Herald of the Bauman Moscow State Technical University, Series Instrument Engineering — Feb 1, 2018
+
+A system for testing image stabilization algorithms: parameterized video sequence generator simulating tracking mode, parameterized distortion and interference generator (with physically correct noise model), error analysis algorithm for alignment, and report generation module. Critical distortion parameter values established experimentally; algorithms tested and compared for real-time frame combination.
+
+## Programs & Training
+
+- YC Startup School: Completed summer 2022. Participated in YC co-founder matching events.
+- Courses: Algorithms: Design and Analysis (Coursera, 2012); MongoDB for Developers (MongoDB University, 2013); Functional Programming Principles in Scala (Coursera, 2014); Principles of Reactive Programming (Coursera, 2015); Neural Networks (Stepik, 2018); Stanford University School of Engineering — Machine Learning (2022); MIT Introduction to Deep Learning (2024)
+
+---
+
+## Work Experience
+
+### Fairmarkit — Independent Contractor (Jan 2026 – present)
+
+Project: Bid Pulse — Agentic RFQ monitoring system for a procurement marketplace.
+
+Built the entire system end to end: multi-stage pipeline that discovers open RFQs from the Fairmarkit marketplace API, analyzes relevance against supplier product catalogs (~1900 products) using a three-tier matching engine, and sends email digests with relevant matches.
+
+What I built:
+- Three-tier matching engine: MPN exact match → keyword relevance scoring → batch semantic search (pgvector, OpenAI text-embedding-3-large, cosine threshold 0.40)
+- Dual evaluator verification: two LLM passes in parallel (loose and strict prompts) re-check match quality, producing score ranges (score_low from strict, score_high from loose). MPN matches auto-pass without LLM calls
+- Catalog opportunity reports with React server-side rendering (renderToStaticMarkup + juice CSS inlining) via Node.js subprocess
+- Catalog upload flow with LLM-assisted column mapping (CSV/Excel → header detection → GPT-suggested column mapping → background ingestion)
+- Bid outcome tracking with two-phase refresh algorithm (discover new bids + update pending outcomes)
+- Email digest system with Mixpanel tracking (open pixels, click redirects, HMAC-signed URLs)
+- Full admin UI: supplier management, settings, analytics dashboard with weekly metrics + KPIs + bid outcome breakdown (won/lost/waiting, win rate)
+- Ground-truth evaluation system for matching accuracy
+- Infrastructure: Terraform/OpenTofu on DigitalOcean, Docker Compose, Caddy auto-HTTPS, systemd timers, GitHub Actions CI/CD, SOPS+age secrets management
+
+Stack: Python (FastAPI, pydantic-ai, SQLAlchemy, Alembic), React 19, TypeScript 5.9, TanStack Router/Query, shadcn/ui, PostgreSQL (pgvector), OpenAI GPT-4o-mini, Langfuse (OpenTelemetry), Docker, Terraform/OpenTofu, DigitalOcean
+
+---
+
+### Winrate.com — Head of Product Development (Aug 2025 – Jan 2026, 6 months)
+
+AI sales platform for finding perfect-fit accounts and preparing for meetings. Built the entire AI agent stack, call transcript ingestion system, evaluation framework, and distributed infrastructure from scratch. The monorepo has 7,123 commits across three merged packages (app, research-service, common).
+
+AI Agents (LangGraph + LangChain, TypeScript):
+
+1. ICP Creation Agent — Multi-turn conversational workflow with human-in-the-loop interrupts. LangGraph StateGraph with PostgreSQL checkpointing for seamless session resume. Graph: research → coverage evaluation → interrupt for user input → criteria generation → compile + save. Dual WebSocket message formats (legacy + modern ICPMessage).
+
+2. ICP Scoring Agent — Two-phase evaluation: LLM assesses each criterion (met/not-met/unknown + confidence), then code applies business effects (DISQUALIFIER, ADD/SUBTRACT_POINTS) → final score 0–100 with per-criterion breakdown. createReactAgent with Zod structured output.
+
+3. Account Research Agent — Dynamic tool registration, multi-source data collection (Tavily, ProxyCurl, Apollo, Diffbot), RAG over two-level knowledge base (org + account) via pgvector with text-embedding-3-large.
+
+4. Research Document Pipeline — 3-agent orchestration: Planner generates 4–6 step plan + specialized prompts → Executor executes each step with tools → Compiler synthesizes into structured report → S3 + vector indexing.
+
+5. Meeting Prep Agent — Processes call transcripts + CRM data, summarizes key decisions, actions, deadlines.
+
+6. General Chat Agent — StateGraph with streaming, structured queries via JSON schema responses.
+
+Call Transcript Ingestion System:
+- Three-stage pipeline: Poller (EventBridge every 60 min) → SQS → Processor (chunk + embed + store)
+- Integrates Gong (access key auth, org-wide) and Fireflies (API key, per-user, GraphQL)
+- Transcripts chunked (~1000 tokens with overlap), embedded via OpenAI text-embedding-3-small (1536 dim), stored in pgvector
+- RuleResolver auto-assigns transcripts to accounts based on participant email domains
+- Historical import with pagination, rate limiting, exponential backoff, crash recovery via checkpoint state
+- Full UI: connection modals, transcript list/detail views, assignment rules management, audit logs
+- Storage: S3 (transcript JSON) + PostgreSQL (file_vectors for semantic search)
+
+Evaluation System:
+- 9 independent LangSmith-integrated evaluators: relevancy, conciseness, coherence, citations, broken links, email format, LinkedIn format, battle card format, preamble format
+- Dataset-driven, multi-model comparison (Claude-3.5 vs GPT-4), configurable repetitions per example
+
+Distributed Rate Limiting & Job Orchestration:
+- Atomic Lua scripts in Redis: token bucket with continuous refill, pre-flight acquisition + post-call adjustment
+- Separate tracking for RPM (requests/min) and TPM (tokens/min) with CloudWatch metrics
+- Backpressure-aware job dispatcher on Lambda + SQS + EventBridge, singleton dispatcher pattern
+- Reduced wasted Lambda invocations by 96% — from ~30x to 1.1x per job at 15K jobs/day
+
+Stack: React 19, TypeScript 5.9, Vite 7.3, TailwindCSS 4.1, shadcn/ui, Zustand, AWS (Lambda, SQS, EventBridge, S3, Cognito, Secrets Manager, CloudWatch), PostgreSQL (pgvector), Redis (ioredis + Lua), LangGraph 0.4.9, LangChain 0.3.36, LangSmith 0.3.74, OpenAI GPT-4o, Sentry, OpenTelemetry, HubSpot + Salesforce CRM integrations
+
+Blog post: https://ivkin.dev/blog/rate-limiting-and-job-orchestration-at-scale
+
+---
+
+### Zumbach Electronic AG (Switzerland) — Consulting
+
+Zumbach Electronic is a Swiss manufacturer of non-contact laser measurement systems (ODAC), founded in 1957 in Orpund, Switzerland. ~200-500 employees, 100,000+ ODAC measuring heads deployed worldwide across wire & cable, plastics, and steel industries. Their ODAC devices measure diameter, ovality, and concentricity of products on production lines at up to 9,000 measurements per second.
+
+Completely reimagined the UX for their industrial monitoring system. The legacy USYS processors used touchscreen-mounted hardware with proprietary serial protocols, siloed data, and limited remote access. Conducted user research to understand factory floor operator workflows, identified pain points, and designed a modern web-based solution from scratch — optimized for the specific goals and constraints of industrial environments (touch screens, multi-axis device configurations, real-time data requirements).
+
+What I built:
+- Real-time live dashboard with 4-channel measurement grid, color-coded status indicators, dual view modes (numeric + trend charts) — replacing legacy USYS hardware displays
+- ZeroMQ pub/sub for real-time measurement streaming from device → FastAPI backend → WebSocket to React UI
+- Visual centering guidance: 2D cross-section of product inside measurement head, laser beam directions, FOV, adaptive geometry for 1/2/3-axis laser configs (ODAC single-axis, XY dual-axis, TRIO 3-axis), interactive "flip view"
+- Tolerance configuration UI with inline editing and zone display modes
+- Product setup pages with recipe editing and 3-axis visualization
+- Touch-screen optimization for factory floor operators
+- Multi-arch Docker builds (amd64, arm64, arm/v7 for Raspberry Pi deployed on production lines)
+- Custom monorepo UI component library (@zumbach/ui): 35+ components, built with tsup (ESM+CJS+.d.ts), Storybook 8.6 for visual documentation, pnpm workspaces
+- ZMQ device simulator for development and testing (configurable 1/2/3-axis modes)
+
+Stack: React 18.3, TypeScript 5.6, Vite 5.4, CSS Modules, React Router 7.13, Radix UI, Vitest, Storybook 8.6, FastAPI, Python 3.11+, pyzmq 25.1+, Pydantic 2.4+, Orjson, Docker (multi-stage, multi-arch), GitHub Actions CI/CD, Ruff, Pyright
+
+---
+
+### Ace Trace — Founder & Solo Developer (started ~2021, acquired Aug 2025)
+
+Mobile sports video editor / shot tracer app for golf, disc golf, and baseball. iOS and Android.
+
+Key metrics:
+- $15K MRR
+- 6,000+ paying subscribers
+- 10K monthly installs
+- 4.4-star App Store rating
+- #2 in App Store for "golf tracer" search term
+
+Technical implementation:
+- Custom UNet-RCNN neural network for detecting objects as small as 4 pixels and tracking motion in video — three production model variants (UNet-RCNN, disc golf variant, MobileNetV2-UNet), each ~142MB, deployed via iOS On-Demand Resources
+- Physics-based trajectory fitting using NLopt optimization + Boost/odeint C++ differential equation solver compiled as iOS DyLib
+- OpenCV-based video stabilization (C++/Objective-C bridge)
+- Visual SLAM and camera pose estimation for auto-tracking
+- RevenueCat for subscription management, Firebase (auth, Firestore, functions), Mixpanel analytics
+- Automated marketing partnership outreach by developing an AI agent that targets and drafts personalized messages to golf influencers on Instagram
+- Produced and edited marketing videos using generative AI tools (Runway, Veo, Sora) to generate golf shot visualizations and highlight reels
+- Created and analyzed application metrics (Mixpanel, Firebase Analytics) to guide feature development
+- Hired ML engineers and interns for object-tracking algorithm research
+
+Product management & experimentation:
+- Ran extensive A/B tests using Firebase and Mixpanel to measure retention and conversion impact
+- Social feed experiment: built a full community feature with gamification (posts, comments, bird character progression, coin-based rewards). A/B test showed no retention improvement and conversion degradation — terminated and rolled back. Key learning: artificial engagement mechanics don't substitute for solving real user problems
+- UX experiment: tested removing explicit "+button tap" step for trajectory creation — conversion rates dropped significantly, users got confused. Reverted to original design
+- Pricing experiments: shifted from subscription-only to hybrid model (subscriptions + à la carte video bundles + free video every 35 days). Initial pricing change was "a disaster" — users stopped buying. Iterated until discovering that offering a free video option counterintuitively doubled conversion
+- Golf players organically discovered the app (originally built for disc golf) — adapted product for golf market, hired contractor for ML-based golf trajectory prediction, fired after weeks of zero progress, pivoted to manual Bezier curve interface
+- Automatic shot tracking: 6+ months of development, trained neural networks on user-provided videos + professional annotations, deployed Python backend on AWS EC2. Result: only ~60 auto-tracked videos/day vs. much higher manual tracking — "super overrated feature"
+
+User research & growth:
+- Conducted user interviews to understand retention problems (identified as core weakness despite steady new user flow)
+- Met with complementary product founders (e.g., ex-Maps.me CMO) to discuss retention strategies
+- Organized QA team: found and trained QA engineers, ran weekly testing meetings
+- Hired graphic designers for character illustrations, interns for computer graphics and tracking algorithm research
+- Participated in YC Startup School (Summer 2022) to learn growth strategies, met ~100 founders via YC co-founder matching
+- Growth was largely organic: App Store ranking for "golf tracer", users sharing traces on Instagram
+
+Business:
+- Acquired in 2025 by an Italian app portfolio company (previously scaled a fishing app to millions of users)
+- Found buyer through Vas3k.club community, listed on Flippa marketplace
+- Full upfront payment via escrow.com
+- Non-compete: 1 year (negotiated down from 2)
+- Rejected multiple offers: Asian company (1X ARR + ongoing work), golf product company (3-year deferred payments). Held firm on price, negotiated Flippa fees down
+- Learned realistic app valuations: 2–4× ARR for consumer indie apps (vs. 10× ARR fantasy from Twitter)
+- Ran a 60-day Kickstarter campaign for Android version ($601 raised of $4,000 goal, 10 backers)
+- Decision to sell driven by burnout after many experiments that didn't move retention, despite product performing well
+
+Stack: Swift/SwiftUI, PyTorch (LibTorch-Lite), OpenCV, NLopt, Boost 1.85, C++ (DyLib), Firebase, RevenueCat, Mixpanel
+
+Blog posts: https://ivkin.dev/blog/the-acquisition, https://ivkin.dev/blog/build-dylib-library-for-ios, https://ivkin.dev/blog/matrix-transformations, https://ivkin.dev/blog/ace-trace-social-feed-and-2022-updates, https://ivkin.dev/blog/ace-trace-update
+
+---
+
+### Enabled Health Inc. — Co-Founder & CTO (Jan 2024 – Feb 2026)
+
+AI-powered physical therapy solutions for hospitals.
+
+Products built:
+- iOS bedside trainer app integrating computer vision-based engagement tracking and exercise guidance for hospitalized patients
+- Voice AI agent in production to communicate with patients, deliver exercise prompts, and collect feedback
+- Led R&D of new computer vision algorithms for body-pose estimation and motion tracking; integrated models into the iPad app to monitor exercise form
+- 80% of new code written by AI agents (Claude Code, Cursor)
+
+Team & achievements:
+- Managed a mixed remote and on-site team of engineers, UX and motion designers, and data analysts
+- Conducted direct hospital staff and patient interviews to validate features
+- Two hospital pilot programs
+- MA Digital Health Sandbox grant (MA challenge grant)
+- $200K pre-seed funding
+
+Stack: Swift/SwiftUI, Node.js/TypeScript, AI voice agents based on LLMs, GCP/Firebase
+
+Outcome: Closed the company in February 2026 and returned investments to investors. Hospital sales cycles proved extremely slow and the business was very difficult to execute — after several years the team concluded they were unable to create sustainable revenue streams. Valuable lessons learned about healthcare go-to-market.
+
+Blog post: https://ivkin.dev/blog/my-startup-journey-challenges-and-the-battle-for-intellectual-property
+
+---
+
+### Recspert — CTO & Product Manager (Dec 2022 – Apr 2023, ~4 months)
+
+Website: https://www.recspert.com/
+
+Virtual recreational center web application for scheduling training sessions with coaches. Led a team of 3 engineers, acting as both CTO and product manager. Built everything from scratch.
+
+What I built:
+- Full-stack web platform: coaches create classes with location-based search, pricing tiers (session packages), and scheduling
+- Student enrollment flow with session scheduling, proposed times, and location suggestions
+- Stripe payment processing with connected accounts model (75% to coach, 25% platform commission)
+- Real-time messaging via Twilio Conversations
+- Background check integration via Checkr for coach verification
+- Subscription addon system (Recspert Lite plan at $39.99/month with Zoom integration, group classes, workshops)
+- Photo uploads to AWS S3, email notifications via Nodemailer
+- Review and ratings system, favorites/bookmarking
+
+Stack: React 18, TypeScript, Redux Toolkit, Material-UI, Formik/Yup, Node.js/Express, MongoDB (Mongoose), Stripe, Firebase Auth, Twilio, AWS (S3, EC2), Docker, Mixpanel, Storybook
+
+---
+
+### ALM Works — Lead Software Developer (Apr 2015 – Mar 2022, 7 years)
+
+ALM Works was founded in 2004 by Igor Sereda in Saint Petersburg, Russia. The company built Structure for Jira — enterprise project/portfolio management plugin that lets teams organize work from multiple projects into custom hierarchies with a spreadsheet-like interface. ALM Works grew to 5,000+ customers, ~50-100 employees, and was acquired by Tempo Software (backed by Diversis Capital) in December 2021 for an undisclosed sum. US headquarters was established at 181 Wells Ave, Newton, Massachusetts in 2016.
+
+What I built and did:
+- One of the first employees who built the Structure product — the flagship Jira plugin for project portfolio management, first released in 2011
+- Structure.Gantt — built from scratch, leading a team of 4 engineers. Gantt chart extension for Structure with cross-project timeline visualization, dependency tracking (FS/FF/SS/SF), resource allocation charts, configurable calendars, and capacity management. 5,000+ installations. Released February 2018
+- Participated in Structure Cloud, Structure.Pages, and Structure.Testy projects
+- Presented company products at international conferences
+- Joined the Labs team ("Structure Innovations", Apr 2021 – Mar 2022) to research new product ideas, conduct user interviews, prototype and test MVPs
+- Built Cross-Team PI Planner — a collaborative cross-team planning tool for sprint planning, road mapping, and agile PI (Program Increment) planning. Board-based interface with JQL-powered backlog search, dependency management, and work estimates. Shipped as part of the Structure Innovations early access program
+
+---
+
+### OpenWay Group (Saint Petersburg) — Test Engineer → Software Engineer
+
+OpenWay Group is a Belgian-headquartered payment technology company (founded 1995) that builds the Way4 digital payments platform — a unified suite of ~40 modules covering card issuing, merchant acquiring, payment switching, digital banking, and wallets. Way4 serves 500+ payment organizations across 100+ countries, handling portfolios up to 180 million accounts and processing 4,300 transactions per second. Primary R&D center is in Saint Petersburg.
+
+As Quality Engineer (Aug 2009 – May 2012):
+- Built a testing framework for Way4's card transaction processing engine — a system that is still in use at the company in 2026 (15+ years of active use)
+- Payment System Interchange team leader — covered most functionality with automated tests
+- Designed from scratch a testing strategy for the Mastercard Russian Switch project
+- The Way4 transaction processing engine handles the full lifecycle: authorization, 3DS authentication, clearing, settlement, GL posting, fraud controls, pricing, limits, routing, and merchant settlement
+- OpenWay later productized this type of testing capability as "Way4 Testing Framework" with 1,000+ ready-to-use test cases — the framework Alexander built was the precursor/foundation
+
+As Software Developer (May 2012 – Mar 2015):
+- Participated in web, mobile, kiosk, and ATM banking projects on the Way4 platform
+- Developed a new configuration management system from scratch, allowing the banking software to customize interactive screens
+- Way4 Digital Banking provides omni-channel banking services (web, mobile, chatbot, ATM, POS, API) with real-time payments, personalized offers, and automated workflows
+
+---
+
+### InviewLab — Leading Software Developer (Part-Time, Sep 2009 – May 2013)
+
+Created from scratch the spectral recognition software — a part of a device for sample material analysis. Reached the final in the Skolkovo Innovation Award 2011.
+
+What I built:
+- Spectral recognition software for real-time sample material analysis
+- Research and implementation of algorithms for spectral recognition and signal processing
+- Designed the user interface for the software
+- Organized agile-based work process
+
+---
+
+### Sun Microsystems / Oracle (Saint Petersburg) — Test Engineer (2007–2009)
+
+Sun Microsystems maintained a major engineering center in Saint Petersburg (founded 2004, 300+ engineers — the largest Java engineering team outside the US). The St. Petersburg team was fully responsible for Java ME Embedded and contributed significantly to Java SE, including ~1/3 of Java 8 programmers.
+
+JDTS Project (Java Device Test Suite):
+- Created automated web reports for preparing for a release and monitoring team performance
+- Created a web application for testing documentation review
+- Worked on JDTS — Sun's industry-standard quality testing framework for Java ME (Micro Edition) implementations on mobile and embedded devices
+- JDTS tested JVM implementations across ~11,000 tests covering functionality, stress testing, performance benchmarks, and OTA (Over-the-Air) provisioning
+- Complemented the specification-compliance TCK (Technology Compatibility Kit) by testing real-world quality: error handling, performance under stress, interactions between multiple APIs
+- The 2007-2009 period coincided with Java's open-sourcing (OpenJDK release May 2007), the release of JCK under OCTLA, and the Apache Harmony TCK licensing controversy
+- JDTS architecture: Central Installation (test repository) → Relay (web app coordinating execution) → Tester Harnesses (GUI/batch tools) → Device under test
+- Sun was acquired by Oracle in January 2010; JDTS continued under Oracle's Java ME testing portfolio
+
+---
+
+## Hackathons & Side Projects
+
+### Sundai Club — Weekly AI Hackathons (Boston)
+
+Regular participant at Sundai Club, a weekly AI hackathon community in Boston.
+
+1. Tasks Auto-Complete (https://github.com/sundai-club/tasks-auto-complete) — AI agent that monitors desktop via Screenpipe, detects routine patterns (filling shopping carts, completing forms), and offers to finish the job next time. Electron + Chrome extension + Python browser-use agent.
+
+2. Fashion Search (https://github.com/evekeen/fashion_search) — "The Perplexity for Fashion." AI-powered style discovery platform built in 8 hours with a 3-person team at Sundai Club (April 6, 2025). Stack: Next.js 13, TypeScript, GPT-4, Stable Diffusion, DALL-E 2, FLUX 1.1 Pro, Google Shopping API (Serper.dev), Redis (Upstash), Vercel. Blog post: https://ivkin.dev/blog/fashion-search-ai-powered-style-discovery-in-one-day
+
+3. Vibe Debugging With Memes (https://github.com/sundai-club/error-meme) — MCP server that generates memes from error messages for developer debugging in Cursor. OpenAI + ImgFlip API + Node.js. Blog post: https://ivkin.dev/blog/vibe-debugging-with-memes
+
+4. James Webb Live (https://github.com/sundai-club/james_webb_live) — 3D interactive visualization of real galaxy photographs from the James Webb telescope. Three.js + Python data processing.
+
+5. Evals for AI-Assisted Engineering (https://github.com/evekeen/evals-for-ai-assisted-engineering) — Analyzing Claude Code traces for candidate evaluation of AI-assisted coding skills.
+
+6. Cycle Crash (https://github.com/evekeen/cycle-crash) — Bicycle accident analysis in Cambridge — mapping the most dangerous streets for cyclists.
+
+### Other Hackathons
+
+7. MIT Reality Hack (March 2022) — 5-day hackathon at MIT. Pitch training game for musicians. Unity + Magic Leap. Blog post: https://ivkin.dev/blog/mit-reality-hack-getting-ready
+
+8. MIT AI Filmmaking Hackathon (February 2025) — Produced a 2-minute AI-generated film using OpenArt, Midjourney, ElevenLabs, ffmpeg. Blog post: https://ivkin.dev/blog/mit-ai-filmmaking-hackathon
+
+### Other Projects
+
+- VR Frisbee (https://github.com/evekeen/vrfrisbee) — VR frisbee game simulating realistic disc flight physics. A-Frame, ARKit, Apple Reality Composer.
+- Backyard Tails (https://github.com/evekeen/backyardtails) — Board game project. TypeScript.
+- Box of Memories — "Shared journal for couples" iOS app. Published on App Store under Ivkin LLC.
+- PokerNotes — Watch app for live poker notes. Swift.
+- ASO Agent (https://github.com/evekeen/aso-agent) — App Store Optimization agent. Python.
+- ASO MCP / App Store MCP / App Store Revenue MCP — MCP server tools for App Store data.
+- Instagram Outreach (https://github.com/evekeen/instagram-outreach) — TypeScript.
+- Barcelona Home Seekers (https://github.com/evekeen/barcelona-home-seekers) — TypeScript.
+- Cita Filler (https://github.com/evekeen/cita-filler) — Spanish police appointment automation. Python.
+
+---
+
+## Technical Skills
+
+### Languages
+TypeScript (primary), Python, Swift, Java, Kotlin, JavaScript, C++, MATLAB, Ruby
+
+### AI / ML
+- LLM Orchestration: LangGraph, LangChain, pydantic-ai
+- Models: OpenAI GPT-4/4o/4o-mini, Claude-3.5, structured output with Zod
+- Embeddings & Vector Search: text-embedding-3-large (1536 dim), text-embedding-3-small, pgvector, cosine similarity
+- Computer Vision: PyTorch (on-device UNet-RCNN CNN), object detection/tracking (4px objects), OpenCV video stabilization, pose estimation (openpifpaf iOS port), Visual SLAM
+- Image Generation: Stable Diffusion, DALL-E 2, Midjourney, FLUX 1.1 Pro
+- Video Generation: Runway, Veo, Sora
+- Voice: ElevenLabs
+- Evaluation: ground-truth evals, 9-evaluator LangSmith framework, dual evaluator verification (loose/strict prompts)
+- Observability: Langfuse (OpenTelemetry), LangSmith, Sentry, CloudWatch
+- Prompt Management: Langfuse (production labels + hardcoded fallbacks), LangSmith Hub (Mustache templates, A/B via tags)
+
+### Frontend
+React (18, 19), Next.js 13, TanStack Router/Query, shadcn/ui, Radix UI, TailwindCSS, Vite, Zustand, CSS Modules, Storybook, A-Frame, Three.js
+
+### Backend
+Java, Kotlin, Python, Node.js (Express, Lambda), FastAPI, Pydantic, SQLAlchemy, Alembic, ZeroMQ (pyzmq)
+
+### Databases
+PostgreSQL (pgvector, FOR UPDATE SKIP LOCKED), MongoDB (Mongoose ODM), Redis (Lua scripting for atomic rate limiting)
+
+### Infrastructure & DevOps
+AWS (Lambda, SQS, EventBridge, S3, Cognito, Secrets Manager, CloudWatch), Docker (multi-arch: amd64, arm64, arm/v7), Terraform/OpenTofu, DigitalOcean, GitHub Actions CI/CD, Vercel, systemd timers, SOPS + age secrets
+
+### Mobile
+Swift/SwiftUI, React Native, Flutter, Jetpack Compose, iOS (AVFoundation, ARKit, SceneKit), C++ DyLib (NLopt, Boost, OpenCV), RevenueCat, Firebase
+
+### Other
+Atlassian/Jira ecosystem (built Structure + Structure.Gantt + Cross-Team PI Planner), payment processing systems (Way4 platform, card transaction testing), MCP (Model Context Protocol) servers, Mixpanel/Firebase analytics, HubSpot + Salesforce CRM integrations, pnpm workspaces monorepo, Storybook component libraries, JVM testing (JDTS)
+
+---
+
+## Key Metrics & Achievements
+
+- 96% reduction in wasted Lambda invocations — from ~30x to 1.1x per job at 15K jobs/day (Winrate)
+- $15K MRR — Ace Trace mobile app
+- 6,000 paying subscribers — Ace Trace mobile app
+- $200K pre-seed raised — Enabled Health
+- Two hospital pilots — Enabled Health
+- 7 AI systems built — 6 agents + transcript ingestion pipeline (Winrate)
+- 9 independent evaluators — LangSmith evaluation framework (Winrate)
+- 4.4-star App Store rating — Ace Trace
+- Successful acquisition — Ace Trace sold to Italian portfolio company (2025)
+- Structure.Gantt — built from scratch, led team of 4 at ALM Works
+- Cross-Team PI Planner — built at ALM Works Labs
+- Testing framework still in use 15+ years later — Way4 card transaction processing (OpenWay, built ~2011)
+- Skolkovo Innovation Award 2011 finalist — InviewLab spectral recognition software
+- 5,000+ installations — Structure.Gantt (ALM Works)
+- 3,196 commits — Ace Trace iOS app
+- 7,123 commits — Winrate monorepo
+- 415 commits — Zumbach production dashboard
+
+---
+
+## Career Narrative
+
+Alexander studied Electronics and Microelectronics at SPbGETU "LETI" (Bachelor's 2003–2007, Master's 2007–2009), then worked as a test engineer at Sun Microsystems in Saint Petersburg (2007–2009) on the JDTS project testing JVM implementations. Concurrently with his early career, he built spectral recognition software at InviewLab (2009–2013), reaching the Skolkovo Innovation Award 2011 finals. At OpenWay Group he built a testing framework for the Way4 card transaction processing engine (~2011) — still in use in 2026 — served as Payment System Interchange team leader, then moved to software engineering building web, mobile, kiosk, and ATM banking. He pursued a PhD at MIPT (2013–2015, not completed) in computer vision while working part-time as lead software developer building object tracking systems.
+
+He joined ALM Works in April 2015 as lead software developer, building Structure for Jira through to 5,000+ customers and the Tempo acquisition in 2021. Built Structure.Gantt from scratch leading a team of 4, then moved to the Labs team (Structure Innovations) doing user research, prototyping, and shipping Cross-Team PI Planner. Left after 7 years in March 2022.
+
+Went indie in March 2022, founding Ivkin LLC. Built Ace Trace (6K+ paying subscribers, 10K monthly installs, acquired 2025), co-founded Enabled Health as CTO ($200K pre-seed, 2 hospital pilots, closed Feb 2026), built the full AI agent stack at Winrate as Head of Product Development (6 agents, transcript ingestion, evaluation framework, 96% Lambda waste reduction), and now consults independently on production AI systems (Fairmarkit/Bid Pulse, Zumbach Electronic).
+
+The thread connecting everything: building complete, working products end to end — and making things that last. A testing framework built in 2011 still runs in production. A neural network detects 4-pixel objects in video. A rate limiting system cut waste by 96%. Every project ships to real users.
+
+Deeply engaged with the AI builder community through weekly Sundai Club hackathons in Boston — consistently goes from morning idea to working product by evening.
+
+---
+
+## Blog Posts
+
+- Rate Limiting and Job Orchestration at Scale (Dec 16, 2025): https://ivkin.dev/blog/rate-limiting-job-orchestration-at-scale
+- The Acquisition (Aug 28, 2025): https://ivkin.dev/blog/the-acquisition
+- Fashion Search: AI-Powered Style Discovery in One Day (Apr 10, 2025): https://ivkin.dev/blog/fashion-search-ai-powered-style-discovery-in-one-day
+- Vibe Debugging with Memes (Mar 24, 2025): https://ivkin.dev/blog/vibe-debugging-with-memes
+- MIT AI Filmmaking Hackathon (Feb 22, 2025): https://ivkin.dev/blog/mit-ai-filmmaking-hackathon
+- My Startup Journey (May 16, 2023): https://ivkin.dev/blog/my-startup-journey-challenges-and-the-battle-for-intellectual-property
+- Ace Trace Social Feed and 2022 Updates (Apr 26, 2023): https://ivkin.dev/blog/ace-trace-social-feed-and-2022-updates
+- Build DyLib Library for iOS (Nov 22, 2022): https://ivkin.dev/blog/build-dylib-library-for-ios
+- Ace Trace Update (Jul 24, 2022): https://ivkin.dev/blog/ace-trace-update
+- SF Startup Conference (Apr 28, 2022): https://ivkin.dev/blog/sf-startup-conference
+- Matrix Transformations (Apr 7, 2022): https://ivkin.dev/blog/matrix-transformations
+- Speedgun (Mar 20, 2022): https://ivkin.dev/blog/speedgun
+- MIT Reality Hack: Getting Ready (Mar 20, 2022): https://ivkin.dev/blog/mit-reality-hack-getting-ready
+- I quit my job (Mar 15, 2022): https://ivkin.dev/blog/first-post
+
+---
+
+## Contact
+
+For consulting inquiries: https://ivkin.dev/consulting
