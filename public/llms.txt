@@ -1,6 +1,6 @@
 # Alexander Ivkin
 
-> Software engineer and independent consultant. 15+ years building products end to end — from JVM testing at Sun Microsystems to production AI agents today. Founded Ace Trace (6K paying subscribers, acquired 2025). Currently helping companies ship agentic AI applications.
+> CTO, engineering leader, and independent consultant. 15+ years building and shipping products end to end — from JVM testing at Sun Microsystems to production AI agents today. Led engineering teams of 3–6, owned product roadmaps, hired and mentored engineers. Founded Ace Trace (6K paying subscribers, acquired 2025). Co-founded Enabled Health as CTO (raised $200K, 2 hospital pilots). Currently helping companies ship agentic AI applications.
 
 ## Identity
 
@@ -16,6 +16,20 @@
 ## What I Do Now
 
 Independent consultant helping companies ship production agentic AI applications and re-imagine their product vision. Full-stack: LLM agent architecture, evaluation systems, React frontends, cloud infrastructure — end to end.
+
+## Leadership & Management
+
+Team leadership: Managed engineering and cross-functional teams of 3–6 across multiple companies. At Winrate, led a team of 4 engineers with full ownership of product management, roadmap, and delivery. At Enabled Health, managed a cross-functional remote/on-site team spanning engineers, UX designers, motion designers, and data analysts. At ALM Works, led a team of 4 building Structure.Gantt from scratch to 5,000+ installations. At Recspert, led a team of 3 as both CTO and product manager.
+
+Hiring & mentoring: Interviewed engineering candidates and mentored junior developers throughout 7 years at ALM Works. At Ace Trace, hired and managed contractors for UX design, ML research, and QA. Organized a QA team with weekly testing cadence. Hired ML engineers and interns for object-tracking algorithm research.
+
+Process establishment: Set up development processes for teams at ALM Works. Established agile workflows at InviewLab and MIPT.
+
+Product ownership: Owned product roadmap at every role since 2015 — user research, prioritization, A/B testing, kill decisions. At ALM Works Labs, researched new product ideas, ran customer interviews, prototyped and validated MVPs.
+
+Fundraising & stakeholder management: Raised $200K pre-seed and won MA Digital Health Sandbox grant at Enabled Health. Conducted hospital staff and patient interviews to validate product-market fit. Negotiated Ace Trace acquisition — rejected unfavorable offers, held firm on price, closed full upfront payment.
+
+Strategic decisions: Terminated features based on data (social feed A/B test showed no retention improvement at Ace Trace), pivoted markets (disc golf to golf), closed Enabled Health and returned investor capital when the business model proved unviable.
 
 ## Education
 
@@ -67,7 +81,7 @@ Stack: Python (FastAPI, pydantic-ai, SQLAlchemy, Alembic), React 19, TypeScript 
 
 ### Winrate.com — Head of Product Development (Aug 2025 – Jan 2026, 6 months)
 
-AI sales platform for finding perfect-fit accounts and preparing for meetings. Built the entire AI agent stack, call transcript ingestion system, evaluation framework, and distributed infrastructure from scratch. The monorepo has 7,123 commits across three merged packages (app, research-service, common).
+AI sales platform for finding perfect-fit accounts and preparing for meetings. Managed a team of 4 engineers with full ownership of product management, roadmap, and delivery. Built the entire AI agent stack, call transcript ingestion system, evaluation framework, and distributed infrastructure from scratch. The monorepo has 7,123 commits across three merged packages (app, research-service, common).
 
 AI Agents (LangGraph + LangChain, TypeScript):
 
@@ -129,9 +143,9 @@ Stack: React 18.3, TypeScript 5.6, Vite 5.4, CSS Modules, React Router 7.13, Rad
 
 ---
 
-### Ace Trace — Founder & Solo Developer (started ~2021, acquired Aug 2025)
+### Ace Trace — Founder (started ~2021, acquired Aug 2025)
 
-Mobile sports video editor / shot tracer app for golf, disc golf, and baseball. iOS and Android.
+Mobile sports video editor / shot tracer app for golf, disc golf, and baseball. iOS and Android. Hired and managed contractors for UX design, ML research, and QA. Organized a QA team with weekly testing meetings. Hired ML engineers and interns for object-tracking algorithm research.
 
 Key metrics:
 - $15K MRR
@@ -149,7 +163,6 @@ Technical implementation:
 - Automated marketing partnership outreach by developing an AI agent that targets and drafts personalized messages to golf influencers on Instagram
 - Produced and edited marketing videos using generative AI tools (Runway, Veo, Sora) to generate golf shot visualizations and highlight reels
 - Created and analyzed application metrics (Mixpanel, Firebase Analytics) to guide feature development
-- Hired ML engineers and interns for object-tracking algorithm research
 
 Product management & experimentation:
 - Ran extensive A/B tests using Firebase and Mixpanel to measure retention and conversion impact
@@ -185,7 +198,7 @@ Blog posts: https://ivkin.dev/blog/the-acquisition, https://ivkin.dev/blog/build
 
 ### Enabled Health Inc. — Co-Founder & CTO (Jan 2024 – Feb 2026)
 
-AI-powered physical therapy solutions for hospitals.
+AI-powered physical therapy solutions for hospitals. Co-founded and led as CTO. Raised $200K pre-seed funding. Won MA Digital Health Sandbox grant. Managed a cross-functional remote/on-site team of engineers, UX designers, motion designers, and data analysts.
 
 Products built:
 - iOS bedside trainer app integrating computer vision-based engagement tracking and exercise guidance for hospitalized patients
@@ -232,6 +245,8 @@ Stack: React 18, TypeScript, Redux Toolkit, Material-UI, Formik/Yup, Node.js/Exp
 
 ALM Works was founded in 2004 by Igor Sereda in Saint Petersburg, Russia. The company built Structure for Jira — enterprise project/portfolio management plugin that lets teams organize work from multiple projects into custom hierarchies with a spreadsheet-like interface. ALM Works grew to 5,000+ customers, ~50-100 employees, and was acquired by Tempo Software (backed by Diversis Capital) in December 2021 for an undisclosed sum. US headquarters was established at 181 Wells Ave, Newton, Massachusetts in 2016.
 
+Led a team of 4 engineers building Structure.Gantt. Set up new development processes for the teams. Interviewed engineering candidates and mentored junior developers. Served as escalation point for technical support on complicated product issues. Presented company products at international conferences. On the Labs team (Structure Innovations), conducted customer interviews and owned the product roadmap for new product exploration.
+
 What I built and did:
 - One of the first employees who built the Structure product — the flagship Jira plugin for project portfolio management, first released in 2011
 - Structure.Gantt — built from scratch, leading a team of 4 engineers. Gantt chart extension for Structure with cross-project timeline visualization, dependency tracking (FS/FF/SS/SF), resource allocation charts, configurable calendars, and capacity management. 5,000+ installations. Released February 2018
@@ -248,7 +263,7 @@ OpenWay Group is a Belgian-headquartered payment technology company (founded 199
 
 As Quality Engineer (Aug 2009 – May 2012):
 - Built a testing framework for Way4's card transaction processing engine — a system that is still in use at the company in 2026 (15+ years of active use)
-- Payment System Interchange team leader — covered most functionality with automated tests
+- Led the Payment System Interchange team, covering most functionality with automated tests
 - Designed from scratch a testing strategy for the Mastercard Russian Switch project
 - The Way4 transaction processing engine handles the full lifecycle: authorization, 3DS authentication, clearing, settlement, GL posting, fraud controls, pricing, limits, routing, and merchant settlement
 - OpenWay later productized this type of testing capability as "Way4 Testing Framework" with 1,000+ ready-to-use test cases — the framework Alexander built was the precursor/foundation
@@ -262,7 +277,7 @@ As Software Developer (May 2012 – Mar 2015):
 
 ### InviewLab — Leading Software Developer (Part-Time, Sep 2009 – May 2013)
 
-Created from scratch the spectral recognition software — a part of a device for sample material analysis. Reached the final in the Skolkovo Innovation Award 2011.
+Created from scratch the spectral recognition software — a part of a device for sample material analysis. Reached the final in the Skolkovo Innovation Award 2011. Planned the project roadmap and established the agile development process for the team.
 
 What I built:
 - Spectral recognition software for real-time sample material analysis
