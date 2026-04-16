@@ -62,7 +62,7 @@ A system for testing image stabilization algorithms: parameterized video sequenc
 
 Project: Bid Pulse — Agentic RFQ monitoring system for a procurement marketplace.
 
-Built the entire system end to end: multi-stage pipeline that discovers open RFQs from the Fairmarkit marketplace API, analyzes relevance against supplier product catalogs (~1900 products) using a three-tier matching engine, and sends email digests with relevant matches.
+Built the entire system end to end: multi-stage pipeline that discovers open RFQs from the Fairmarkit marketplace API, analyzes relevance against supplier product catalogs (2.5M+ products) using a three-tier matching engine, and sends email digests with relevant matches.
 
 What I built:
 - Three-tier matching engine: MPN exact match → keyword relevance scoring → batch semantic search (pgvector, OpenAI text-embedding-3-large, cosine threshold 0.40)
@@ -76,6 +76,29 @@ What I built:
 - Infrastructure: Terraform/OpenTofu on DigitalOcean, Docker Compose, Caddy auto-HTTPS, systemd timers, GitHub Actions CI/CD, SOPS+age secrets management
 
 Stack: Python (FastAPI, pydantic-ai, SQLAlchemy, Alembic), React 19, TypeScript 5.9, TanStack Router/Query, shadcn/ui, PostgreSQL (pgvector), OpenAI GPT-4o-mini, Langfuse (OpenTelemetry), Docker, Terraform/OpenTofu, DigitalOcean
+
+---
+
+Project: Fair Platform — Internal app platform enabling product managers and sales to build and ship production-ready prototypes to clients without the engineering team.
+
+Like Lovable, but for internal use — with access to internal APIs, security hardening, and production-grade infrastructure. Enables new revenue streams and faster client feedback loops by bypassing the engineering roadmap bottleneck. PMs and sales can prototype, iterate with clients, and ship — all without waiting for engineering capacity.
+
+Built the entire platform from scratch: AI-assisted IDE with live preview, git-based scaffolding from templates, one-click publishing, and per-app Kubernetes isolation.
+
+What I built:
+- Portal (Next.js 16 / React 19): app creation wizard, split-screen editor (Claude Code IDE + live preview), app list with status management (draft/published/archived)
+- API (FastAPI): app CRUD, GitHub repo scaffolding from templates with variable substitution, Kubernetes orchestration via Server-Side Apply, IDE lifecycle management (start/stop with status polling), publish/unpublish flows
+- Per-app Kubernetes isolation: each app gets its own namespace with 2 containers (IDE: Claude Code + ttyd + tmux; Runtime: Next.js dev server with hot reload), shared 5 Gi PVC, NetworkPolicy blocking metadata/API server access
+- Security hardening: Squid egress proxy with FQDN allow-list (GitHub, OpenAI, Anthropic, npm, pypi), Falco runtime threat detection with tiered alerts (PAGE for critical: metadata access, proxy bypass; LOG for batch review), incident runbook with forensics and containment procedures
+- Authentication: Okta OIDC via OAuth2 Proxy, JIT user provisioning on first login, access control (draft apps visible only to owner/collaborators)
+- App lifecycle: soft/hard delete with auto-reclaim of apps archived >30 days, per-user app quota enforcement, Prometheus metrics (fair_apps_total gauge by status)
+- Negotiation agent template: multi-supplier AI negotiation engine with Claude Opus, 8 personas, 4-layer state machine, copilot-in-the-loop approval (buyer intercept mid-negotiation), reward history persistence, Langfuse prompt management. Frontend: 3-panel layout (scenarios, game plan, negotiation chat) with price charts, proposal actions, audit trail
+- Infrastructure: Terraform on DigitalOcean DOKS, ArgoCD GitOps, Traefik ingress with wildcard TLS, k3d for local development via Tiltfile
+- Three app templates shipped: document-qa-chat (first shipped — PDF ingestion + RAG), negotiation-agent, saas-admin-dashboard
+
+Scale: 3–8 concurrent apps on 2× g-8vcpu-32gb nodes (~$500/mo). Per-app resources: 450m CPU / 768 Mi memory / 5 Gi storage.
+
+Stack: Next.js 16, React 19, TypeScript, TailwindCSS v4, FastAPI, Python 3.13, SQLAlchemy, PostgreSQL, Kubernetes, ArgoCD, Traefik, Terraform, DigitalOcean DOKS, Docker, Anthropic Claude Opus, Langfuse, Prometheus, Okta OIDC
 
 ---
 
@@ -122,7 +145,7 @@ Blog post: https://ivkin.dev/blog/rate-limiting-and-job-orchestration-at-scale
 
 ---
 
-### Zumbach Electronic AG (Switzerland) — Consulting
+### Zumbach Electronic AG (Switzerland) — Consulting (Sep 2025 – present)
 
 Zumbach Electronic is a Swiss manufacturer of non-contact laser measurement systems (ODAC), founded in 1957 in Orpund, Switzerland. ~200-500 employees, 100,000+ ODAC measuring heads deployed worldwide across wire & cable, plastics, and steel industries. Their ODAC devices measure diameter, ovality, and concentricity of products on production lines at up to 9,000 measurements per second.
 
