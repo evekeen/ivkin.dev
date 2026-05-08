@@ -15,7 +15,18 @@
 
 ## What I Do Now
 
-Independent consultant helping companies ship production agentic AI applications and re-imagine their product vision. Full-stack: LLM agent architecture, evaluation systems, React frontends, cloud infrastructure — end to end.
+Independent consultant helping companies ship production agentic AI applications and re-imagine their product vision. Full-stack: LLM agent architecture, evaluation systems, React frontends, cloud infrastructure — end to end. Current engagements: Fairmarkit (Bid Pulse + Fair Platform) and Zumbach Electronic (industrial UX modernization).
+
+## Currently Building
+
+In parallel with consulting, building two new mobile apps from scratch. Actively looking to launch a startup with the right co-founder(s) — Barcelona's founder community is part of the reason I'm here. Open to:
+- AI/agent products that need an experienced builder on architecture and evals
+- Mobile-first consumer or prosumer apps
+- Fractional CTO / technical co-founder conversations with early-stage teams
+
+## Personal
+
+Based in Barcelona. Ride a motorcycle. Run film clubs. Play saxophone.
 
 ## Leadership & Management
 
@@ -328,9 +339,9 @@ JDTS Project (Java Device Test Suite):
 
 ## Hackathons & Side Projects
 
-### Sundai Club — Weekly AI Hackathons (Boston)
+### Sundai Club — AI Hackathons (Boston)
 
-Regular participant at Sundai Club, a weekly AI hackathon community in Boston.
+Past participant at Sundai Club, a weekly AI hackathon community in Boston.
 
 1. Tasks Auto-Complete (https://github.com/sundai-club/tasks-auto-complete) — AI agent that monitors desktop via Screenpipe, detects routine patterns (filling shopping carts, completing forms), and offers to finish the job next time. Electron + Chrome extension + Python browser-use agent.
 
@@ -433,7 +444,7 @@ Went indie in March 2022, founding Ivkin LLC. Built Ace Trace (6K+ paying subscr
 
 The thread connecting everything: building complete, working products end to end — and making things that last. A testing framework built in 2011 still runs in production. A neural network detects 4-pixel objects in video. A rate limiting system cut waste by 96%. Every project ships to real users.
 
-Deeply engaged with the AI builder community through weekly Sundai Club hackathons in Boston — consistently goes from morning idea to working product by evening.
+Deeply engaged with the AI builder community through Sundai Club hackathons in Boston — consistently goes from morning idea to working product by evening. Now plugged into the Barcelona founder community.
 
 ---
 
