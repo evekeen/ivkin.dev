@@ -308,9 +308,9 @@ Sun Microsystems maintained a major engineering center in Saint Petersburg (foun
 
 ## Hackathons & Side Projects
 
-### Sundai Club — Weekly AI Hackathons (Boston)
+### Sundai Club — AI Hackathons (Boston)
 
-Regular participant at Sundai Club, a weekly AI hackathon community in Boston. Described as "my favorite community of AI enthusiasts and hackers in Boston."
+Past participant at Sundai Club, a weekly AI hackathon community in Boston. Described as "my favorite community of AI enthusiasts and hackers in Boston."
 
 (Source: blog posts, GitHub repos)
 
@@ -458,17 +458,16 @@ Went indie in March 2022, founding Ivkin LLC. Built Ace Trace (6K+ paying subscr
 
 The thread connecting everything: building complete, working products end to end — and making things that last. A testing framework built in 2011 still runs in production. A neural network detects 4-pixel objects in video. A rate limiting system cut waste by 96%. Every project ships to real users.
 
-Deeply engaged with the AI builder community through weekly Sundai Club hackathons in Boston — consistently goes from morning idea to working product by evening. Also ran an indie hacker meetup in Belgrade.
+Deeply engaged with the AI builder community through Sundai Club hackathons in Boston — consistently goes from morning idea to working product by evening. Now based in Barcelona and plugged into the local founder community.
 
 ---
 
 ## Personal
 
+- Based in Barcelona; previously Saint Petersburg (ALM Works days)
 - Got married June 2025
-- Interests: disc golf, golf, tennis, Ultimate Frisbee, motorcycling
-- Runs an indie hacker meetup in Belgrade (weekly Thursday meetups)
-- Active in Vas3k.club community
-- Previously based in Saint Petersburg (ALM Works days), now based in Barcelona
+- Interests: motorcycling, saxophone, film clubs (organizes), disc golf, Ultimate Frisbee
+- Active in Vas3k.club community and the Barcelona founder scene
 
 ---
 

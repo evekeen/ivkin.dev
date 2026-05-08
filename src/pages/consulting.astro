@@ -5,53 +5,76 @@ import Footer from '../components/Footer.astro';
 
 const experiences = [
   {
-    period: "January 2024 – Present",
-    company: "Enabled Health Inc",
-    role: "Co-founder, CTO",
-    description: "AI physical therapy trainer for hospitals. Won MA challenge grant. Raised $200k of funding. Launched two hospital pilots.",
+    period: "January 2026 – Present",
+    company: "Fairmarkit",
+    role: "Independent Consultant",
+    description: "Shipping two production AI systems for a B2B procurement marketplace: Bid Pulse (agentic RFQ monitoring) and Fair Platform (an internal Lovable that lets product managers and sales vibe-code prototypes straight to clients — securely, with production-grade infrastructure).",
     achievements: [
-      "Built and launched an iOS bedside trainer app integrating computer vision–based engagement tracking and exercise guidance for hospitalized patients",
-      "Designed and implemented a voice AI agent in production to communicate with patients, deliver exercise prompts, and collect feedback",
-      "Led R&D of new computer vision algorithms for body-pose estimation and motion tracking",
-      "Manage a mixed remote and on-site team of engineers, UX and motion designers, and data analysts",
-      "80% of new code is written by AI agents (Claude Code, Cursor, etc)"
+      "Bid Pulse: built end-to-end agentic system that discovers RFQs, matches them against 2.5M+ supplier products via three-tier engine (MPN exact match → keyword scoring → pgvector semantic search) with dual-evaluator LLM verification",
+      "Fair Platform: AI-assisted IDE with live preview, git-based template scaffolding, one-click publishing, and per-app Kubernetes isolation — so PMs and sales can ship to clients without engineering capacity",
+      "Security hardening for Fair Platform: Squid egress proxy with FQDN allow-list, Falco runtime threat detection with tiered alerts, NetworkPolicy blocking metadata access, Okta OIDC with JIT provisioning",
+      "Stack: FastAPI, Next.js, React 19, PostgreSQL/pgvector, Kubernetes (DOKS), Terraform/OpenTofu, ArgoCD, OpenAI, Anthropic Claude Opus, Langfuse"
+    ]
+  },
+  {
+    period: "September 2025 – Present",
+    company: "Zumbach Electronic",
+    role: "Independent Consultant",
+    description: "Modernizing the UX of a Swiss industrial measurement system whose interfaces had been frozen in the 90s. Conducted user research with factory floor operators, then designed and built a new web-based monitoring product from scratch — replacing legacy USYS hardware displays.",
+    achievements: [
+      "Real-time live dashboard with 4-channel measurement grid and dual view modes; ZeroMQ pub/sub streaming from device → FastAPI → WebSocket to React",
+      "Visual centering guidance for 1/2/3-axis laser configurations with adaptive geometry and interactive flip view",
+      "Touch-screen-optimized tolerance configuration and product-recipe editing for factory operators",
+      "Multi-arch Docker builds (amd64, arm64, arm/v7 for Raspberry Pi) and a custom monorepo UI component library shipped via tsup + Storybook"
     ]
   },
   {
     period: "August 2025 – January 2026",
     company: "Winrate.com",
     role: "Head of Product Development",
-    description: "Led AI agent product development and full-stack engineering for a next-generation sales enablement platform. Managed a team of four engineers and oversaw product management, roadmap, and delivery.",
+    description: "Built the entire AI agent stack, call transcript ingestion, evaluation framework, and distributed infrastructure for a B2B sales platform from scratch. Managed a team of four engineers with full ownership of product management, roadmap, and delivery.",
     achievements: [
-      "Built AI agent workflows for automated account research and meeting preparation using LangGraph/LangChain",
-      "Designed scalable backend on AWS (Lambda, CDK, API Gateway, PostgreSQL)",
-      "Developed real-time AI chat and streaming interfaces in React/TypeScript",
-      "Integrated CRM data pipelines and vector search for semantic enrichment"
+      "Built ICP creation, ICP scoring, account research, research-document, meeting-prep, and general-chat agents on LangGraph with PostgreSQL checkpointing and human-in-the-loop interrupts",
+      "Call transcript ingestion across Gong and Fireflies — three-stage pipeline (poller → SQS → processor) with chunking, embedding (OpenAI text-embedding-3-small), and pgvector storage",
+      "Evaluation framework with multi-model comparison (Claude-3.5 vs GPT-4) and dataset-driven repetitions, integrated with LangSmith",
+      "Reduced wasted Lambda invocations by 96% — from ~30x to 1.1x per job at 15K jobs/day — via Redis Lua token-bucket rate limiting and a backpressure-aware singleton dispatcher"
     ]
   },
   {
-    period: "April 2021 – July 2025",
-    company: "Ace Trace",
-    role: "Founder",
-    description: "Launched a mobile sports video editor app for iOS and Android. 6000 paid customers on a subscription model. AppStore rating of 4.4 with more than 1.1K reviews. MRR $15K. Successfully exited through acquisition.",
+    period: "January 2024 – February 2026",
+    company: "Enabled Health Inc",
+    role: "Co-founder, CTO",
+    description: "AI physical therapy for hospitals. Raised $200K pre-seed, won MA Digital Health Sandbox grant, launched two hospital pilots. Closed in February 2026 after concluding the team could not establish sustainable revenue against long hospital sales cycles; returned remaining capital to investors.",
     achievements: [
-      "Created and maintained a custom computer vision model that traces golf-ball flight in video",
-      "Grew to 6,000 paying subscribers and ~20,000 monthly installs on iOS/Android; fully bootstrapped",
-      "Automated marketing partnership outreach by developing an AI agent that targets and drafts personalized messages to golf influencers",
-      "Produce and edit marketing videos using generative AI tools (Runway, Veo, Sora)"
+      "iOS bedside trainer integrating computer vision–based engagement tracking and exercise guidance for hospitalized patients",
+      "Voice AI agent in production to communicate with patients, deliver exercise prompts, and collect feedback",
+      "Led R&D of computer vision algorithms for body-pose estimation and motion tracking",
+      "Managed a mixed remote and on-site team of engineers, UX and motion designers, and data analysts",
+      "Conducted hospital staff and patient interviews to validate features"
+    ]
+  },
+  {
+    period: "2021 – August 2025 (Acquired)",
+    company: "Ace Trace",
+    role: "Founder & CEO",
+    description: "Mobile sports video editor and shot-tracer app for golf, disc golf, and baseball. Built solo and sold in 2025 to an Italian app portfolio company through Flippa, with full upfront payment via escrow.com.",
+    achievements: [
+      "Grew to 6,000 paying subscribers, $15K MRR, ~10,000 monthly installs, 4.4-star App Store rating, #2 on App Store for \"golf tracer\"",
+      "Custom UNet-RCNN neural network detecting 4-pixel objects in video, deployed on-device via iOS On-Demand Resources",
+      "Physics-based trajectory fitting with NLopt + Boost/odeint compiled as iOS DyLib; OpenCV video stabilization; visual SLAM camera pose estimation",
+      "Hired and managed contractors for UX, ML research, and QA; ran weekly QA testing meetings and extensive A/B tests on retention, pricing, and onboarding"
     ]
   },
   {
     period: "April 2015 – March 2022",
     company: "ALM Works",
-    role: "Leading Software Developer",
-    description: "Developed Structure.Gantt from scratch and led its evolution from on-premises to cloud platform, achieving 5K+ installations. Contributed to multiple products including Structure Cloud, Structure.Pages, and Structure.Testy. Managed development processes, led teams, and served as an escalation point for technical support.",
+    role: "Lead Software Developer",
+    description: "One of the early engineers building Structure for Jira — the flagship enterprise project portfolio plugin. ALM Works grew to 5,000+ customers and was acquired by Tempo Software in 2021. Led a team of four building Structure.Gantt from scratch.",
     achievements: [
-      "Built Structure.Gantt product from initial concept to market launch with full architectural ownership and 5K+ installations",
-      "Led the cloud migration of Structure.Gantt and established new development processes for cross-functional teams",
-      "Researched and shipped 'Cross-Team PI Planner' MVP as part of the Structure Innovations team",
-      "Conducted customer interviews, analyzed feedback, created product roadmaps, and presented at international conferences",
-      "Mentored developers, led code reviews, and served as technical escalation point for complex customer issues"
+      "Built Structure.Gantt from initial concept to 5,000+ installations with full architectural ownership; led a team of four engineers",
+      "Joined the Labs team (Structure Innovations) — researched new product ideas, ran customer interviews, prototyped MVPs, and shipped Cross-Team PI Planner",
+      "Established new development processes, interviewed engineering candidates, and mentored junior developers across seven years",
+      "Served as technical escalation point for complex support issues; presented company products at international conferences"
     ]
   }
 ];
